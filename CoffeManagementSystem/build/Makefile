@@ -249,6 +249,30 @@ src/optiunea6.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/optiunea6.cpp.s
 .PHONY : src/optiunea6.cpp.s
 
+src/optiunea7.o: src/optiunea7.cpp.o
+.PHONY : src/optiunea7.o
+
+# target to build an object file
+src/optiunea7.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/optiunea7.cpp.o
+.PHONY : src/optiunea7.cpp.o
+
+src/optiunea7.i: src/optiunea7.cpp.i
+.PHONY : src/optiunea7.i
+
+# target to preprocess a source file
+src/optiunea7.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/optiunea7.cpp.i
+.PHONY : src/optiunea7.cpp.i
+
+src/optiunea7.s: src/optiunea7.cpp.s
+.PHONY : src/optiunea7.s
+
+# target to generate assembly for a file
+src/optiunea7.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/optiunea7.cpp.s
+.PHONY : src/optiunea7.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -273,6 +297,9 @@ help:
 	@echo "... src/optiunea6.o"
 	@echo "... src/optiunea6.i"
 	@echo "... src/optiunea6.s"
+	@echo "... src/optiunea7.o"
+	@echo "... src/optiunea7.i"
+	@echo "... src/optiunea7.s"
 .PHONY : help
 
 

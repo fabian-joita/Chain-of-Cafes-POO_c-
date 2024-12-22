@@ -1,5 +1,7 @@
 #include "optiunea6.h"
 #include <filesystem>
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -16,41 +18,82 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
     int alegere;
     cin >> alegere;
 
-    // Selectare antet și date pe baza alegerii
+    // Variables for headers, data, and file path
     vector<string> headers;
     vector<vector<string>> data;
+    string dataString;
     string finalpath;
 
+    // Determine file path and headers based on choice
     switch (alegere)
     {
     case 1:
-        // Antet și date pentru Angajați și Funcții
-        headers = {"Nume Angajat", "Funcție", "Ora Început", "Ora Sfârșit"};
-        data = {
-            {"John Doe", "Manager", "09:00", "17:00"},
-            {"Jane Smith", "Barista", "08:00", "16:00"},
-            {"Alice Johnson", "Waiter", "10:00", "18:00"}};
         finalpath = basePath + cafeLocation + "/" + "Angajati_Functii.csv";
+        if (newCSV.readCSV(finalpath).empty())
+        {
+            headers = {"Nume Angajat", "Funcție", "Ora Început", "Ora Sfârșit"};
+        }
+
+        cout << "Introduceti datele (format: Nume Angajat, Funcție, Ora Început, Ora Sfârșit):" << endl;
+        cin.ignore(); // Clear input buffer
+        std::getline(cin, dataString);
+
+        {
+            istringstream ss(dataString);
+            string field;
+            vector<string> row;
+            while (getline(ss, field, ','))
+            {
+                row.push_back(field);
+            }
+            data.push_back(row);
+        }
         break;
 
     case 2:
-        // Antet și date pentru Produse și Prețuri
-        headers = {"Produs", "Preț"};
-        data = {
-            {"Espresso", "5.00"},
-            {"Latte", "6.00"},
-            {"Cappuccino", "6.50"},
-            {"Croissant", "2.50"}};
         finalpath = basePath + cafeLocation + "/" + "Produse_Preturi.csv";
+        if (newCSV.readCSV(finalpath).empty())
+        {
+            headers = {"Produs", "Preț"};
+        }
+
+        cout << "Introduceti datele (format: Produs, Preț):" << endl;
+        cin.ignore(); // Clear input buffer
+        std::getline(cin, dataString);
+
+        {
+            istringstream ss(dataString);
+            string field;
+            vector<string> row;
+            while (getline(ss, field, ','))
+            {
+                row.push_back(field);
+            }
+            data.push_back(row);
+        }
         break;
 
     case 3:
-        // Antet și date pentru Comenzi
-        headers = {"Nume Client", "Produse Comandate", "Preț Total"};
-        data = {
-            {"Maria Popescu", "Espresso, Croissant", "7.50"},
-            {"Ion Ionescu", "Latte", "6.00"}};
         finalpath = basePath + cafeLocation + "/" + "Comenzi.csv";
+        if (newCSV.readCSV(finalpath).empty())
+        {
+            headers = {"Nume Client", "Produse Comandate", "Preț Total"};
+        }
+
+        cout << "Introduceti datele (format: Nume Client, Produse Comandate, Preț Total):" << endl;
+        cin.ignore(); // Clear input buffer
+        std::getline(cin, dataString);
+
+        {
+            istringstream ss(dataString);
+            string field;
+            vector<string> row;
+            while (getline(ss, field, ','))
+            {
+                row.push_back(field);
+            }
+            data.push_back(row);
+        }
         break;
 
     default:
@@ -58,7 +101,6 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         return;
     }
 
+    // Write to CSV
     newCSV.writeCSV(finalpath, data, headers);
-
-    cout << "Fișierul CSV a fost salvat cu succes la: " << finalpath << endl;
 }

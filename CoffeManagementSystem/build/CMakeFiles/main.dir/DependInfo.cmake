@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/src/cafe_chain.cpp" "CMakeFiles/main.dir/src/cafe_chain.cpp.o" "gcc" "CMakeFiles/main.dir/src/cafe_chain.cpp.o.d"
   "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.o" "gcc" "CMakeFiles/main.dir/src/main.cpp.o.d"
   "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/src/optiunea6.cpp" "CMakeFiles/main.dir/src/optiunea6.cpp.o" "gcc" "CMakeFiles/main.dir/src/optiunea6.cpp.o.d"
+  "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/src/optiunea7.cpp" "CMakeFiles/main.dir/src/optiunea7.cpp.o" "gcc" "CMakeFiles/main.dir/src/optiunea7.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

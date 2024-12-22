@@ -35,7 +35,7 @@ vector<vector<string>> CSV::readCSV(const string &filename)
 
 void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers)
 {
-    ofstream file(filename);
+    ofstream file(filename, ios::app);
     if (!file.is_open())
     {
         cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
@@ -44,15 +44,19 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
     }
 
     // aici se scriu titlurile coloanelor, pe prima linie
-    for (size_t i = 0; i < headers.size(); ++i)
+    if (!headers.empty())
     {
-        file << headers[i];
-        if (i != headers.size() - 1)
+        cout << "headerul nu e gol";
+        for (size_t i = 0; i < headers.size(); ++i)
         {
-            file << ",";
+            file << headers[i];
+            if (i != headers.size() - 1)
+            {
+                file << ",";
+            }
         }
+        file << endl;
     }
-    file << endl;
 
     // scrierea datelor
     for (const auto &row : data)
