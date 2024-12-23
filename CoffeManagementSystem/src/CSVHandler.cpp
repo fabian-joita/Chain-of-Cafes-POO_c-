@@ -13,7 +13,7 @@ vector<vector<string>> CSV::readCSV(const string &filename)
         return data;
     }
 
-    // sar peste prima linie la citire
+    // Sarim peste prima linie (header)
     getline(file, line);
 
     while (getline(file, line))
@@ -35,15 +35,15 @@ vector<vector<string>> CSV::readCSV(const string &filename)
 
 void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers)
 {
-    ofstream file(filename, ios::app);
+    ofstream file(filename, ios::app); // Deschidem fișierul în mod de adăugare
     if (!file.is_open())
     {
         cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
-        cerr << strerror(errno) << endl; // afișează mesajul de eroare detaliat
+        cerr << strerror(errno) << endl; // Afișăm mesajul de eroare detaliat
         return;
     }
 
-    // aici se scriu titlurile coloanelor, pe prima linie
+    // Scriem titlurile coloanelor, doar dacă sunt prezente
     if (!headers.empty())
     {
         for (size_t i = 0; i < headers.size(); ++i)
@@ -57,7 +57,48 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
         file << endl;
     }
 
-    // scrierea datelor
+    // Scrierea datelor în fișier
+    for (const auto &row : data)
+    {
+        for (size_t i = 0; i < row.size(); ++i)
+        {
+            file << row[i];
+            if (i != row.size() - 1)
+            {
+                file << ",";
+            }
+        }
+        file << endl;
+    }
+
+    file.close();
+}
+
+void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers)
+{
+    ofstream file(filename); // Deschidem fișierul în mod de rescriere
+    if (!file.is_open())
+    {
+        cerr << "Eroare la deschiderea fisierului pentru rescriere: " << filename << endl;
+        cerr << strerror(errno) << endl;
+        return;
+    }
+
+    // Scriem titlurile coloanelor, doar dacă sunt prezente
+    if (!headers.empty())
+    {
+        for (size_t i = 0; i < headers.size(); ++i)
+        {
+            file << headers[i];
+            if (i != headers.size() - 1)
+            {
+                file << ",";
+            }
+        }
+        file << endl;
+    }
+
+    // Scrierea datelor în fișier (vechi și noi)
     for (const auto &row : data)
     {
         for (size_t i = 0; i < row.size(); ++i)

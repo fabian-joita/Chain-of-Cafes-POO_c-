@@ -6,25 +6,29 @@
 
 using namespace std;
 
-class Produs
+class Product
 {
 private:
-    string nume;
-    double pret;
+    string name;  // Product name
+    double price; // Product price
 
 public:
     // Constructor
-    Produs(const string &numeProdus, double pretProdus) : nume(numeProdus), pret(pretProdus) {}
+    Product(const string &productName, double productPrice) : name(productName), price(productPrice) {}
 
-    // Metoda de afisare
+    // Method to display product information
     void displayInfo() const
     {
-        cout << "Produs: " << nume << ", Pret: " << pret << " RON" << endl;
+        cout << "Product: " << name << ", Price: " << price << " RON" << endl;
     }
 
-    // Getter pentru date
-    string getNume() const { return nume; }
-    double getPret() const { return pret; }
+    // Getter and Setter for name
+    string getName() const { return name; }
+    void setName(const string &productName) { name = productName; }
+
+    // Getter and Setter for price
+    double getPrice() const { return price; }
+    void setPrice(double productPrice) { price = productPrice; }
 };
 
 #endif // PRODUCT_H

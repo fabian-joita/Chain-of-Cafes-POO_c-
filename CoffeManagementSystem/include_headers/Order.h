@@ -7,33 +7,55 @@
 
 using namespace std;
 
-class Comanda
+class Order
 {
 private:
-    string numeClient;
-    vector<string> produseComandate;
-    double pretTotal;
+    string clientName;              // Name of the client
+    vector<string> orderedProducts; // List of ordered products
+    double totalPrice;              // Total price of the order
 
 public:
-    // Constructor
-    Comanda(const string &nume, const vector<string> &produse, double pret)
-        : numeClient(nume), produseComandate(produse), pretTotal(pret) {}
+    // Default constructor
+    Order() : clientName(""), totalPrice(0.0) {}
 
-    // Metoda de afisare
+    // Parameterized constructor
+    Order(const string &client, const vector<string> &products, double price)
+        : clientName(client), orderedProducts(products), totalPrice(price) {}
+
+    // Method to display order information
     void displayInfo() const
     {
-        cout << "Client: " << numeClient << ", Produse Comandate: ";
-        for (const auto &produs : produseComandate)
+        cout << "Client: " << clientName << ", Ordered Products: ";
+        for (const auto &product : orderedProducts)
         {
-            cout << produs << " ";
+            cout << product << " ";
         }
-        cout << ", Pret Total: " << pretTotal << " RON" << endl;
+        cout << ", Total Price: " << totalPrice << " RON" << endl;
     }
 
-    // Getter pentru date
-    string getNumeClient() const { return numeClient; }
-    vector<string> getProduseComandate() const { return produseComandate; }
-    double getPretTotal() const { return pretTotal; }
+    // Getter and Setter for clientName
+    string getClientName() const { return clientName; }
+    void setClientName(const string &client) { clientName = client; }
+
+    // Getter and Setter for orderedProducts
+    vector<string> getOrderedProducts() const { return orderedProducts; }
+    void setOrderedProducts(const vector<string> &products) { orderedProducts = products; }
+
+    // Getter and Setter for totalPrice
+    double getTotalPrice() const { return totalPrice; }
+    void setTotalPrice(double price) { totalPrice = price; }
+
+    // Operator<< for easy printing of the order
+    friend ostream &operator<<(ostream &os, const Order &order)
+    {
+        os << "Client: " << order.clientName << ", Ordered Products: ";
+        for (const auto &product : order.orderedProducts)
+        {
+            os << product << " ";
+        }
+        os << ", Total Price: " << order.totalPrice << " RON";
+        return os;
+    }
 };
 
 #endif // ORDER_H

@@ -7,15 +7,15 @@
 #include <iostream>
 
 using namespace std;
-
 void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
 {
     CSV newCSV;
 
-    cout << "Alege tipul de fisier CSV pe care doresti sa-l scrii (1/2/3):" << endl;
+    cout << "Alege tipul de fisier CSV pe care doresti sa-l scrii (1/2/3/4):" << endl;
     cout << "1. Angajati si Functii" << endl;
     cout << "2. Produse si Preturi" << endl;
     cout << "3. Comenzi" << endl;
+    cout << "4. Stoc Ingrediente" << endl;
 
     int alegere;
     cin >> alegere;
@@ -25,12 +25,14 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
     string dataString;
     string finalpath;
 
-    // Declare all variables here
+    // Declarați toate variabilele aici
     string numeAngajat, functie, locatie;
     int salariu = 0, varsta = 0;
     string oraInceput, oraSfarsit;
     string numeProdus, numeClient, produseStr;
     float pretProdus = 0.0, pretTotal = 0.0;
+    string ingredientName;
+    int ingredientGramaj = 0;
 
     switch (alegere)
     {
@@ -59,22 +61,7 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
 
         locatie = cafeLocation;
 
-        if (functie == "Barista")
-        {
-            Barista barista(numeAngajat, varsta, salariu, functie, locatie, oraInceput, oraSfarsit);
-            barista.displayInfo();
-        }
-        else if (functie == "Manager")
-        {
-            Manager manager(numeAngajat, varsta, salariu, functie, locatie, oraInceput, oraSfarsit);
-            manager.displayInfo();
-        }
-        else if (functie == "Ospatar")
-        {
-            Ospatar ospatar(numeAngajat, varsta, salariu, functie, locatie, oraInceput, oraSfarsit);
-            ospatar.displayInfo();
-        }
-
+        // Adăugăm angajatul la date
         data.push_back({numeAngajat, to_string(varsta), to_string(salariu), functie, locatie, oraInceput, oraSfarsit});
         break;
     }
@@ -92,6 +79,7 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         cout << "2. Preț Produs: ";
         cin >> pretProdus;
 
+        // Adăugăm produsul la date
         data.push_back({numeProdus, to_string(pretProdus)});
         break;
     }
@@ -111,7 +99,26 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         cout << "3. Preț Total: ";
         cin >> pretTotal;
 
+        // Adăugăm comanda la date
         data.push_back({numeClient, produseStr, to_string(pretTotal)});
+        break;
+    }
+    case 4:
+    {
+        finalpath = basePath + cafeLocation + "/" + "stoc.csv";
+        if (newCSV.readCSV(finalpath).empty())
+        {
+            headers = {"Ingredient", "Gramaj"};
+        }
+
+        cout << "1. Nume Ingredient: ";
+        cin.ignore();
+        getline(cin, ingredientName);
+        cout << "2. Gramaj Ingredient (în grame): ";
+        cin >> ingredientGramaj;
+
+        // Adăugăm ingredientul la date
+        data.push_back({ingredientName, to_string(ingredientGramaj)});
         break;
     }
     default:
@@ -119,5 +126,6 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         return;
     }
 
+    // Scriem datele în fișierul CSV corespunzător
     newCSV.writeCSV(finalpath, data, headers);
 }

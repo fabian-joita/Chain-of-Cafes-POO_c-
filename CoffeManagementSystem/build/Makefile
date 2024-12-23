@@ -201,6 +201,30 @@ src/cafe_chain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/cafe_chain.cpp.s
 .PHONY : src/cafe_chain.cpp.s
 
+src/ingredient.o: src/ingredient.cpp.o
+.PHONY : src/ingredient.o
+
+# target to build an object file
+src/ingredient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/ingredient.cpp.o
+.PHONY : src/ingredient.cpp.o
+
+src/ingredient.i: src/ingredient.cpp.i
+.PHONY : src/ingredient.i
+
+# target to preprocess a source file
+src/ingredient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/ingredient.cpp.i
+.PHONY : src/ingredient.cpp.i
+
+src/ingredient.s: src/ingredient.cpp.s
+.PHONY : src/ingredient.s
+
+# target to generate assembly for a file
+src/ingredient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/ingredient.cpp.s
+.PHONY : src/ingredient.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -291,6 +315,9 @@ help:
 	@echo "... src/cafe_chain.o"
 	@echo "... src/cafe_chain.i"
 	@echo "... src/cafe_chain.s"
+	@echo "... src/ingredient.o"
+	@echo "... src/ingredient.i"
+	@echo "... src/ingredient.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

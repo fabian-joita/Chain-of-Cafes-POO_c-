@@ -16,6 +16,7 @@ file(GLOB SOURCES
     ${SRC_DIR}/CSVHandler.cpp
     ${SRC_DIR}/optiunea6.cpp
     ${SRC_DIR}/optiunea7.cpp
+    ${SRC_DIR}/ingredient.cpp
 )
 
 #crearea executabilului

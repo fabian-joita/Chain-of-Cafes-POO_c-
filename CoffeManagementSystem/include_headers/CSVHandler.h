@@ -17,6 +17,8 @@ public:
 
     // scriere in fis csv, inclusiv titlurile coloanelor pe prima linie
     static void writeCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers);
+
+    static void rewriteCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers);
 };
 
 #endif

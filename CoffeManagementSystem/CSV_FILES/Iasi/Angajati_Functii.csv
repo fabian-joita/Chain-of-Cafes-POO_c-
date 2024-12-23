@@ -1,4 +1,3 @@
-Nume Angajat,Funcție,Ora Început,Ora Sfârșit
-John Doe,Manager,09:00,17:00
-Jane Smith,Barista,08:00,16:00
-Alice Johnson,Waiter,10:00,18:00
+Nume Angajat,Varsta,Salariu,Funcție,Locatie,Ora Început,Ora Sfârșit
+Ana Raducu,25,3000,Barista,Iasi,9:00,20:00
+Alex Banutu,41,4000,Ospatar,Iasi,10:00,20:00

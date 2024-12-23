@@ -1,19 +1,24 @@
 #include <iostream>
 #include <filesystem>
+#include <vector>
+#include <memory>
 #include "listareFisiere.cpp"
 #include "cafe_chain.h"
 #include "optiunea6.h"
 #include "optiunea7.h"
+#include "schimbare_caracteristici.h"
 
 using namespace std;
+
+// Assuming the necessary classes for Employee, Product, Order, Ingredient, Display, Sediu, and CAFE are defined elsewhere.
 
 int main()
 {
     bool continua = true;
 
-    CAFE cafeChain; // crearea obiectului CAFE
+    CAFE cafeChain; // Creating the CAFE object
 
-    // adaugare a celor 5 cafenele din cerinta problemei
+    // Adding the five cafes as described in the problem
     Display *cafe1 = new Display();
     cafe1->setLocation("Bucuresti");
     cafeChain.addCafeUnit(cafe1);
@@ -62,7 +67,7 @@ int main()
         cout << "-----------------------------------------------------------------------------------" << endl;
 
         cout << "-----------------------------------------------------------------------------------" << endl;
-        cout << "Se afiseaza cafenelele diponibile: " << endl;
+        cout << "Se afiseaza cafenelele disponibile: " << endl;
         cafeChain.displayCafeLocations();
         cout << "-----------------------------------------------------------------------------------" << endl;
 
@@ -76,20 +81,15 @@ int main()
             Sediu *cafenea = cafeChain.getPtrUnit(optiune);
 
             cout << "Ptr cafenea este: " << cafenea << endl;
-            // aici o sa vreau sa implementez doua ramuri n functie de cel care vrea sa aiba acces la program
-            // owner ul lantului e cafenele va putea sa adauge sau sa stearga angajati
-            // acceul la contul de owner se va face prin introducerea unui cod de acces
-            // angajatul va beneficia de abilitatea de a adauga produse, sterge stocuri, adauga clienti fideli
-            //++sa faca inchiderea de casa
 
-            cout << "Vrei sa accesezi aplicatia ca si anajat sau owner? 1-angajat/2-owner" << endl;
+            cout << "Vrei sa accesezi aplicatia ca si angajat sau owner? 1-angajat/2-owner" << endl;
             int acces;
             cin >> acces;
             if (acces == 1)
             {
                 if (cafenea)
                 {
-                    cafenea->display(); // afisez detaliile despre cafeneaua aleasa
+                    cafenea->display(); // Display details about the selected cafe
                     feedback = true;
 
                     int aceeasi_cafenea;
@@ -98,17 +98,23 @@ int main()
                     {
                         int alegere;
                         cout << "Ce operatie doresti sa faci in aceasta cafenea? " << endl;
-                        // cout << "1. Intra in lista de clienti fideli." << endl;
-                        // cout << "2. Intra in meniu." << endl;
-                        // cout << "3. Intra in stocuri / gestionare produse." << endl;
-                        // cout << "4. Evenimente / Campanii de marketing" << endl;
+                        cout << "1. Schimbare detalii angajati produse_preturi / stocuri_ingrediente." << endl;
                         cout << "5. Scrierea intr-un fisier csv cu date despre cafenea." << endl;
                         cout << "6. Citirea dintr-un fisier csv cu date despre cafenea." << endl;
 
                         cin >> alegere;
-                        if (alegere == 5)
+                        if (alegere == 1)
+                        {
+                            cout << "Despre ce vrei sa schimbi detalii? (angajati/produse/stocuri)" << endl;
+                            string schimbare;
+                            cin >> schimbare;
+                            schimbare_detalii(schimbare, cafenea->getLocatie());
+                        }
+                        else if (alegere == 5)
                         {
                             string path = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+
+                            // Pass the populated containers to writeCSVFile
                             Optiunea6::writeCSVFile(path, cafenea->getLocatie());
                         }
                         else if (alegere == 6)
@@ -118,7 +124,6 @@ int main()
                             string path = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/" + cafenea->getLocatie() + "/";
                             listFilesInDirectory(path);
 
-                            // aici o sa scriu la tastatura exact numele fisierului din care vreau sa citesc
                             string numeFisier;
                             cout << "Introduceti numele fisierului pe care doriti sa il cititi, exact ca si cel afisat: " << endl;
                             cin >> numeFisier;
@@ -137,8 +142,9 @@ int main()
                     feedback = false;
                 }
             }
-            else if (acces == 2) // aici o sa aibe accesul la aplicatie ownerul
+            else if (acces == 2)
             {
+                // Owner-related logic can be implemented here
             }
             else
             {
@@ -157,4 +163,6 @@ int main()
         if (rasp == 0)
             continua = false;
     } while (continua == true);
+
+    return 0;
 }
