@@ -98,10 +98,10 @@ int main()
                     {
                         int alegere;
                         cout << "Ce operatie doresti sa faci in aceasta cafenea? " << endl;
-                        cout << "1. Intra in lista de clienti fideli." << endl;
-                        cout << "2. Intra in meniu." << endl;
-                        cout << "3. Intra in stocuri / gestionare produse." << endl;
-                        cout << "4. Evenimente / Campanii de marketing" << endl;
+                        // cout << "1. Intra in lista de clienti fideli." << endl;
+                        // cout << "2. Intra in meniu." << endl;
+                        // cout << "3. Intra in stocuri / gestionare produse." << endl;
+                        // cout << "4. Evenimente / Campanii de marketing" << endl;
                         cout << "5. Scrierea intr-un fisier csv cu date despre cafenea." << endl;
                         cout << "6. Citirea dintr-un fisier csv cu date despre cafenea." << endl;
 

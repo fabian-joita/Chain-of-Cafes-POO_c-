@@ -46,7 +46,6 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
     // aici se scriu titlurile coloanelor, pe prima linie
     if (!headers.empty())
     {
-        cout << "headerul nu e gol";
         for (size_t i = 0; i < headers.size(); ++i)
         {
             file << headers[i];
