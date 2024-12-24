@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/Employee.cpp.o.d"
   "CMakeFiles/main.dir/src/cafe_chain.cpp.o"
   "CMakeFiles/main.dir/src/cafe_chain.cpp.o.d"
+  "CMakeFiles/main.dir/src/inchidereZi.cpp.o"
+  "CMakeFiles/main.dir/src/inchidereZi.cpp.o.d"
   "CMakeFiles/main.dir/src/ingredient.cpp.o"
   "CMakeFiles/main.dir/src/ingredient.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"

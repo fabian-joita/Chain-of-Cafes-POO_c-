@@ -8,16 +8,15 @@
 #include "optiunea7.h"
 #include "schimbare_caracteristici.h"
 #include "adaugareComanda.h"
+#include "inchidereZi.h"
 
 using namespace std;
-
-// Assuming the necessary classes for Employee, Product, Order, Ingredient, Display, Sediu, and CAFE are defined elsewhere.
 
 int main()
 {
     bool continua = true;
 
-    float vanzari = 0, cheltuieli = 0;
+    float venituri = 0, cheltuieli = 0;
 
     CAFE cafeChain; // Creating the CAFE object
 
@@ -112,6 +111,7 @@ int main()
                         cout << "Ce operatie doresti sa faci in aceasta cafenea? " << endl;
                         cout << "1. Schimbare detalii angajati produse_preturi / stocuri_ingrediente." << endl;
                         cout << "2. Adaugare comanda." << endl;
+                        cout << "3. Inchidere zi (calcul venit = incasari - cheltuieli) => stergere comenzi." << endl;
                         cout << "5. Scrierea intr-un fisier csv cu date despre cafenea." << endl;
                         cout << "6. Citirea dintr-un fisier csv cu date despre cafenea." << endl;
 
@@ -125,7 +125,12 @@ int main()
                         }
                         else if (alegere == 2)
                         {
-                            adaugareComanda(cafenea->getLocatie(), &vanzari, &cheltuieli);
+                            adaugareComanda(cafenea->getLocatie(), &cheltuieli);
+                        }
+                        else if (alegere == 3)
+                        {
+                            inchidereZi zi;
+                            zi.inchidereZiCalcul(cafenea->getLocatie());
                         }
                         else if (alegere == 5)
                         {

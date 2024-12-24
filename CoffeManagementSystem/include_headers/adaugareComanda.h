@@ -1,13 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
-#include "CSVHandler.h"
-
-using namespace std;
-
-void adaugareComanda(const string &locatie, float *vanzari, float *cheltuieli)
+void adaugareComanda(const string &locatie, float *cheltuieli)
 {
     CSV newCSV;
 
@@ -37,11 +28,13 @@ void adaugareComanda(const string &locatie, float *vanzari, float *cheltuieli)
     string costPreparareFile = basePath + "costPreparare&Cumparare.csv";
     string compozitieProduseFile = basePath + "compozitieProduse&&produseBrute.csv";
     string stocFile = basePath + locatie + "/stoc.csv";
+    string clientiFideliFile = basePath + "clientiFideliOnChain.csv";
 
     vector<vector<string>> produsePreturi = newCSV.readCSV(produsePreturiFile);
     vector<vector<string>> costuriPreparare = newCSV.readCSV(costPreparareFile);
     vector<vector<string>> compozitieProduse = newCSV.readCSV(compozitieProduseFile);
     vector<vector<string>> stoc = newCSV.readCSV(stocFile);
+    vector<vector<string>> clientiFideli = newCSV.readCSV(clientiFideliFile);
 
     if (produsePreturi.empty() || costuriPreparare.empty() || compozitieProduse.empty() || stoc.empty())
     {
@@ -63,7 +56,6 @@ void adaugareComanda(const string &locatie, float *vanzari, float *cheltuieli)
                 produsGasit = true;
                 float pretProdus = stof(row[1]);
                 pretTotal += pretProdus;
-                *vanzari += pretProdus;
 
                 // gasim costul produsului
                 for (const auto &costRow : costuriPreparare)
@@ -149,6 +141,24 @@ void adaugareComanda(const string &locatie, float *vanzari, float *cheltuieli)
 
     if (comandaValida)
     {
+        // Verificam daca clientul este fidel si aplicam reducerea
+        float reducere = 0.0f;
+        for (const auto &client : clientiFideli)
+        {
+            if (client[0] == numeClient)
+            {
+                reducere = stof(client[1]);
+                break;
+            }
+        }
+
+        if (reducere > 0)
+        {
+            cout << "Clientul este fidel! Reducere de " << reducere << "%" << endl;
+            cout << "Achizitia ar fi costat " << pretTotal << " fara reducere" << endl;
+            pretTotal = pretTotal - (pretTotal * reducere / 100);
+        }
+
         // Adaugam comanda in fisierul CSV
         data.push_back({numeClient, produseStr, to_string(pretTotal)});
         newCSV.writeCSV(finalpath, data, headers);

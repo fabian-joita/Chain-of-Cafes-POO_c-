@@ -201,6 +201,30 @@ src/cafe_chain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/cafe_chain.cpp.s
 .PHONY : src/cafe_chain.cpp.s
 
+src/inchidereZi.o: src/inchidereZi.cpp.o
+.PHONY : src/inchidereZi.o
+
+# target to build an object file
+src/inchidereZi.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inchidereZi.cpp.o
+.PHONY : src/inchidereZi.cpp.o
+
+src/inchidereZi.i: src/inchidereZi.cpp.i
+.PHONY : src/inchidereZi.i
+
+# target to preprocess a source file
+src/inchidereZi.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inchidereZi.cpp.i
+.PHONY : src/inchidereZi.cpp.i
+
+src/inchidereZi.s: src/inchidereZi.cpp.s
+.PHONY : src/inchidereZi.s
+
+# target to generate assembly for a file
+src/inchidereZi.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/inchidereZi.cpp.s
+.PHONY : src/inchidereZi.cpp.s
+
 src/ingredient.o: src/ingredient.cpp.o
 .PHONY : src/ingredient.o
 
@@ -315,6 +339,9 @@ help:
 	@echo "... src/cafe_chain.o"
 	@echo "... src/cafe_chain.i"
 	@echo "... src/cafe_chain.s"
+	@echo "... src/inchidereZi.o"
+	@echo "... src/inchidereZi.i"
+	@echo "... src/inchidereZi.s"
 	@echo "... src/ingredient.o"
 	@echo "... src/ingredient.i"
 	@echo "... src/ingredient.s"
