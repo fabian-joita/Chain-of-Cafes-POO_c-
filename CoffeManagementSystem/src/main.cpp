@@ -7,6 +7,7 @@
 #include "optiunea6.h"
 #include "optiunea7.h"
 #include "schimbare_caracteristici.h"
+#include "adaugareComanda.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ using namespace std;
 int main()
 {
     bool continua = true;
+
+    float vanzari = 0, cheltuieli = 0;
 
     CAFE cafeChain; // Creating the CAFE object
 
@@ -97,8 +100,18 @@ int main()
                     do
                     {
                         int alegere;
+                        // vreau sa imi fac un fisier care sa contina meniul
+                        // cand adaug o comanda o sa ma folosesc de preturile din meniu pentru a se adauga singure
+                        // meniul o sa fie unul pe tot lantul
+                        // o sa difere doar stocul
+
+                        // o sa am un fisier cu produse si costul lor de preparare
+                        // vanzaribani - (nrcafele * $ + nrape * $ + ...)
+                        // asa calculez venitul zilnic
+                        // vanzari bani va aduna sumele din fisierul comenzi
                         cout << "Ce operatie doresti sa faci in aceasta cafenea? " << endl;
                         cout << "1. Schimbare detalii angajati produse_preturi / stocuri_ingrediente." << endl;
+                        cout << "2. Adaugare comanda." << endl;
                         cout << "5. Scrierea intr-un fisier csv cu date despre cafenea." << endl;
                         cout << "6. Citirea dintr-un fisier csv cu date despre cafenea." << endl;
 
@@ -109,6 +122,10 @@ int main()
                             string schimbare;
                             cin >> schimbare;
                             schimbare_detalii(schimbare, cafenea->getLocatie());
+                        }
+                        else if (alegere == 2)
+                        {
+                            adaugareComanda(cafenea->getLocatie(), &vanzari, &cheltuieli);
                         }
                         else if (alegere == 5)
                         {

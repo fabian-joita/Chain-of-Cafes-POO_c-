@@ -11,11 +11,10 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
 {
     CSV newCSV;
 
-    cout << "Alege tipul de fisier CSV pe care doresti sa-l scrii (1/2/3/4):" << endl;
+    cout << "Alege tipul de fisier CSV pe care doresti sa-l scrii (1/2/3):" << endl;
     cout << "1. Angajati si Functii" << endl;
     cout << "2. Produse si Preturi" << endl;
-    cout << "3. Comenzi" << endl;
-    cout << "4. Stoc Ingrediente" << endl;
+    cout << "3. Stoc Ingrediente" << endl;
 
     int alegere;
     cin >> alegere;
@@ -85,36 +84,16 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
     }
     case 3:
     {
-        finalpath = basePath + cafeLocation + "/" + "Comenzi.csv";
-        if (newCSV.readCSV(finalpath).empty())
-        {
-            headers = {"Nume Client", "Produse Comandate", "Preț Total"};
-        }
-
-        cout << "1. Nume Client: ";
-        cin.ignore();
-        getline(cin, numeClient);
-        cout << "2. Produse Comandate (separate prin virgulă): ";
-        getline(cin, produseStr);
-        cout << "3. Preț Total: ";
-        cin >> pretTotal;
-
-        // Adăugăm comanda la date
-        data.push_back({numeClient, produseStr, to_string(pretTotal)});
-        break;
-    }
-    case 4:
-    {
         finalpath = basePath + cafeLocation + "/" + "stoc.csv";
         if (newCSV.readCSV(finalpath).empty())
         {
-            headers = {"Ingredient", "Gramaj"};
+            headers = {"Ingredient", "Unitati"};
         }
 
-        cout << "1. Nume Ingredient: ";
+        cout << "1. Nume prodBrut(ex:apa)/ingredient(cafeaMacinata): ";
         cin.ignore();
         getline(cin, ingredientName);
-        cout << "2. Gramaj Ingredient (în grame): ";
+        cout << "2. Unitati Ingredient/produsBrut (numarul de unitati): ";
         cin >> ingredientGramaj;
 
         // Adăugăm ingredientul la date
