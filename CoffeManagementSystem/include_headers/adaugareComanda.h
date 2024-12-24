@@ -1,19 +1,49 @@
+#include "adaugareClientFidel.h"
+#include "CSVHandler.h"
+
 void adaugareComanda(const string &locatie, float *cheltuieli)
 {
     CSV newCSV;
-
     vector<string> headers;
     vector<vector<string>> data;
+
     string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
     string finalpath = basePath + locatie + "/" + "Comenzi.csv";
+    string clientiFideliFile = basePath + "clientiFideliOnChain.csv";
+    string produsePreturiFile = basePath + locatie + "/Produse_Preturi.csv";
+    string stocFile = basePath + locatie + "/stoc.csv";
+    string compozitieProduseFile = basePath + "compozitieProduse&&produseBrute.csv";
+
     string numeClient, produseStr;
     float pretTotal = 0.0f;
 
+    // Citim datele din fișiere
+    vector<vector<string>> produsePreturi = newCSV.readCSV(produsePreturiFile);
+    vector<vector<string>> clientiFideliData = newCSV.readCSV(clientiFideliFile);
+    vector<vector<string>> stoc = newCSV.readCSV(stocFile);
+    vector<vector<string>> compozitieProduse = newCSV.readCSV(compozitieProduseFile);
+
+    if (produsePreturi.empty() || stoc.empty() || compozitieProduse.empty())
+    {
+        cerr << "Eroare la citirea fisierelor necesare!" << endl;
+        return;
+    }
+
+    // Transformăm datele din CSV în obiecte Client
+    vector<Client> clientiFideli;
+    for (const auto &row : clientiFideliData)
+    {
+        string line = row[0] + "," + row[1] + "," + row[2];
+        clientiFideli.push_back(Client::creeazaDinSir(line));
+    }
+
+    // Setăm antetul dacă fișierul Comenzi.csv este gol
     if (newCSV.readCSV(finalpath).empty())
     {
         headers = {"Nume Client", "Produse Comandate", "Pret Total"};
     }
 
+    // Solicităm datele comenzii
     cout << "1. Nume Client: ";
     cin.ignore();
     getline(cin, numeClient);
@@ -24,31 +54,13 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
     string produs;
     bool comandaValida = true;
 
-    string produsePreturiFile = basePath + locatie + "/Produse_Preturi.csv";
-    string costPreparareFile = basePath + "costPreparare&Cumparare.csv";
-    string compozitieProduseFile = basePath + "compozitieProduse&&produseBrute.csv";
-    string stocFile = basePath + locatie + "/stoc.csv";
-    string clientiFideliFile = basePath + "clientiFideliOnChain.csv";
-
-    vector<vector<string>> produsePreturi = newCSV.readCSV(produsePreturiFile);
-    vector<vector<string>> costuriPreparare = newCSV.readCSV(costPreparareFile);
-    vector<vector<string>> compozitieProduse = newCSV.readCSV(compozitieProduseFile);
-    vector<vector<string>> stoc = newCSV.readCSV(stocFile);
-    vector<vector<string>> clientiFideli = newCSV.readCSV(clientiFideliFile);
-
-    if (produsePreturi.empty() || costuriPreparare.empty() || compozitieProduse.empty() || stoc.empty())
-    {
-        cerr << "Eroare la citirea fisierelor necesare!" << endl;
-        return;
-    }
-
-    // procesam fiecare produs din comanda
+    // Procesăm produsele din comandă
     while (getline(ss, produs, '+'))
     {
         bool produsGasit = false;
         float costProdus = 0.0f;
 
-        // verificam daca produsul exista in lista de preturi
+        // Verificăm dacă produsul există în lista de prețuri
         for (const auto &row : produsePreturi)
         {
             if (row[0] == produs)
@@ -57,39 +69,25 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
                 float pretProdus = stof(row[1]);
                 pretTotal += pretProdus;
 
-                // gasim costul produsului
-                for (const auto &costRow : costuriPreparare)
-                {
-                    if (costRow[0] == produs)
-                    {
-                        costProdus = stof(costRow[1]);
-                        *cheltuieli += costProdus;
-                        break;
-                    }
-                }
-
-                // verificam si actualizam stocul ingredientelor
+                // Verificăm stocul și actualizăm
                 for (const auto &compozitieRow : compozitieProduse)
                 {
                     if (compozitieRow[0] == produs)
                     {
-                        stringstream compozitieSS(compozitieRow[1]); // ingredientele produsului
+                        stringstream compozitieSS(compozitieRow[1]);
                         string ingredient;
                         while (getline(compozitieSS, ingredient, '+'))
                         {
                             bool ingredientGasit = false;
 
-                            // cautam ingredientul in stoc
                             for (auto &stocRow : stoc)
                             {
                                 if (stocRow[0] == ingredient)
                                 {
                                     ingredientGasit = true;
-                                    int unitatiNecesare = 1;
                                     int unitatiDisponibile = stoi(stocRow[1]);
 
-                                    // Verificam daca sunt suficiente unitati disponibile in stoc
-                                    if (unitatiDisponibile < unitatiNecesare)
+                                    if (unitatiDisponibile < 1)
                                     {
                                         cout << "Stoc insuficient pentru ingredientul: " << ingredient << endl;
                                         comandaValida = false;
@@ -97,14 +95,8 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
                                     }
                                     else
                                     {
-                                        // Scadem o unitate din stoc
-                                        unitatiDisponibile -= unitatiNecesare;
-
-                                        // Actualizam stocul
+                                        unitatiDisponibile--;
                                         stocRow[1] = to_string(unitatiDisponibile);
-
-                                        // aici facem debugging
-                                        cout << "Scazand 1 unitate din stoc. Noul stoc pentru " << ingredient << ": " << unitatiDisponibile << endl;
                                     }
                                 }
                             }
@@ -141,31 +133,53 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
 
     if (comandaValida)
     {
-        // Verificam daca clientul este fidel si aplicam reducerea
-        float reducere = 0.0f;
-        for (const auto &client : clientiFideli)
+        // Verificăm dacă clientul este fidel
+        Client *client = nullptr;
+        for (auto &c : clientiFideli)
         {
-            if (client[0] == numeClient)
+            if (c.getName() == numeClient)
             {
-                reducere = stof(client[1]);
+                client = &c;
                 break;
             }
         }
 
-        if (reducere > 0)
+        if (client)
         {
-            cout << "Clientul este fidel! Reducere de " << reducere << "%" << endl;
-            cout << "Achizitia ar fi costat " << pretTotal << " fara reducere" << endl;
-            pretTotal = pretTotal - (pretTotal * reducere / 100);
+            float reducere = client->getProcentReducere();
+            cout << "Client fidel! Reducere: " << reducere << "%" << endl;
+            pretTotal -= (pretTotal * reducere / 100);
+
+            // Creștem reducerea dacă totalul este peste 10 lei
+            if (pretTotal > 10)
+            {
+                client->incrementReducere();
+            }
+        }
+        else
+        {
+            // Adăugăm clientul ca nou client fidel
+            Client nouClient(numeClient, true, 1);
+            clientiFideli.push_back(nouClient);
         }
 
-        // Adaugam comanda in fisierul CSV
+        // Adăugăm comanda în fișier
         data.push_back({numeClient, produseStr, to_string(pretTotal)});
         newCSV.writeCSV(finalpath, data, headers);
 
-        // Actualizam fisierul de stoc
+        // Actualizăm stocul
         vector<string> headerStoc = {"Ingredient", "Unitati"};
         newCSV.rewriteCSV(stocFile, stoc, headerStoc);
+
+        // Salvăm lista actualizată de clienți fideli
+        vector<vector<string>> clientiFideliSerialized;
+        for (const auto &c : clientiFideli)
+        {
+            clientiFideliSerialized.push_back({c.getName(),
+                                               c.isFidel() ? "1" : "0",
+                                               to_string(c.getProcentReducere())});
+        }
+        newCSV.rewriteCSV(clientiFideliFile, clientiFideliSerialized, {"Nume Client", "Fidel", "Reducere"});
 
         cout << "Comanda a fost adaugata si stocul a fost actualizat!" << endl;
     }

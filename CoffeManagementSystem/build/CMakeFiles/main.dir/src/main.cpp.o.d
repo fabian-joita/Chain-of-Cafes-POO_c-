@@ -879,4 +879,5 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/include_headers/schimbare_caracteristici.h \
   /Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/include_headers/Product.h \
   /Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/include_headers/adaugareComanda.h \
+  /Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/include_headers/adaugareClientFidel.h \
   /Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/include_headers/inchidereZi.h
