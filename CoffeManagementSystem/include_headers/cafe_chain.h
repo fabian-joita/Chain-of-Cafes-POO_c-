@@ -16,8 +16,8 @@ protected:
     vector<Employee> employees;
 
 public:
-    Sediu();                    // Constructorul declarat
-    virtual ~Sediu() = default; // Destructor virtual
+    Sediu();
+    virtual ~Sediu() = default;
 
     void addEmployee(const Employee &employee);
     void setLocation(string location);
@@ -27,15 +27,15 @@ public:
     int getNmbClients() const;
     string getLocatie() const;
 
-    virtual void update() = 0;        // Metodă virtuală pură
-    virtual void display() const = 0; // Metodă virtuală pură pentru display
+    virtual void update() = 0;
+    virtual void display() const = 0;
 };
 
 class Display : public Sediu
 {
 public:
-    void update() override;        // Marcare const
-    void display() const override; // Implementarea metodei display
+    void update() override;
+    void display() const override;
 };
 
 class CAFE
@@ -45,12 +45,12 @@ private:
     int nmb_sedii = 0;
 
 public:
-    void addCafeUnit(Sediu *center); // Modificăm funcția să nu mai primească un pointer pentru nmb_sedii
+    void addCafeUnit(Sediu *center);
     void displayAllSedii();
     void displayCafeLocations();
     int getNmbSedii();
 
-    Sediu *getPtrUnit(int optiune); // Metoda pentru a obține pointer la o cafenea
+    Sediu *getPtrUnit(int optiune);
 };
 
 #endif

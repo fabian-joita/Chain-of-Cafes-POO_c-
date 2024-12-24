@@ -1,11 +1,11 @@
 #include "ingredient.h"
 
-string Ingredient::getName() const // `const` adăugat la funcție
+string Ingredient::getName() const
 {
     return name;
 }
 
-int Ingredient::getGramaj() const // `const` adăugat la funcție
+int Ingredient::getGramaj() const
 {
     return gramaj;
 }

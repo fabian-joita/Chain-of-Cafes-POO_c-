@@ -35,15 +35,15 @@ vector<vector<string>> CSV::readCSV(const string &filename)
 
 void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers)
 {
-    ofstream file(filename, ios::app); // Deschidem fișierul în mod de adăugare
+    ofstream file(filename, ios::app); // Deschidem fisierul in mod de adaugare
     if (!file.is_open())
     {
         cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
-        cerr << strerror(errno) << endl; // Afișăm mesajul de eroare detaliat
+        cerr << strerror(errno) << endl; // Afisam mesajul de eroare detaliat
         return;
     }
 
-    // Scriem titlurile coloanelor, doar dacă sunt prezente
+    // Scriem titlurile coloanelor, doar daca sunt prezente
     if (!headers.empty())
     {
         for (size_t i = 0; i < headers.size(); ++i)
@@ -57,7 +57,7 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
         file << endl;
     }
 
-    // Scrierea datelor în fișier
+    // Scrierea datelor in fisier
     for (const auto &row : data)
     {
         for (size_t i = 0; i < row.size(); ++i)
@@ -76,7 +76,7 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
 
 void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data, const vector<string> &headers)
 {
-    ofstream file(filename); // Deschidem fișierul în mod de rescriere
+    ofstream file(filename); // Deschidem fisierul in mod de rescriere
     if (!file.is_open())
     {
         cerr << "Eroare la deschiderea fisierului pentru rescriere: " << filename << endl;
@@ -84,7 +84,7 @@ void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data,
         return;
     }
 
-    // Scriem titlurile coloanelor, doar dacă sunt prezente
+    // Scriem titlurile coloanelor, doar daca sunt prezente
     if (!headers.empty())
     {
         for (size_t i = 0; i < headers.size(); ++i)
@@ -98,7 +98,7 @@ void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data,
         file << endl;
     }
 
-    // Scrierea datelor în fișier (vechi și noi)
+    // Scrierea datelor in fisier (vechi si noi)
     for (const auto &row : data)
     {
         for (size_t i = 0; i < row.size(); ++i)

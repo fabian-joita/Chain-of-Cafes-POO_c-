@@ -24,7 +24,7 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
     string dataString;
     string finalpath;
 
-    // Declarați toate variabilele aici
+    // Declarati toate variabilele aici
     string numeAngajat, functie, locatie;
     int salariu = 0, varsta = 0;
     string oraInceput, oraSfarsit;
@@ -40,7 +40,7 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         finalpath = basePath + cafeLocation + "/" + "Angajati_Functii.csv";
         if (newCSV.readCSV(finalpath).empty())
         {
-            headers = {"Nume Angajat", "Varsta", "Salariu", "Funcție", "Locatie", "Ora Început", "Ora Sfârșit"};
+            headers = {"Nume Angajat", "Varsta", "Salariu", "Functie", "Locatie", "Ora Inceput", "Ora Sfarsit"};
         }
 
         cout << "Se citesc datele in urmatoarea ordine: " << endl;
@@ -51,16 +51,16 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         cin >> varsta;
         cout << "3. Salariu: ";
         cin >> salariu;
-        cout << "4. Funcție: ";
+        cout << "4. Functie: ";
         cin >> functie;
-        cout << "5. Ora Început: ";
+        cout << "5. Ora Inceput: ";
         cin >> oraInceput;
-        cout << "6. Ora Sfârșit: ";
+        cout << "6. Ora Sfarsit: ";
         cin >> oraSfarsit;
 
         locatie = cafeLocation;
 
-        // Adăugăm angajatul la date
+        // Adaugam angajatul la date
         data.push_back({numeAngajat, to_string(varsta), to_string(salariu), functie, locatie, oraInceput, oraSfarsit});
         break;
     }
@@ -69,16 +69,16 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         finalpath = basePath + cafeLocation + "/" + "Produse_Preturi.csv";
         if (newCSV.readCSV(finalpath).empty())
         {
-            headers = {"Produs", "Preț"};
+            headers = {"Produs", "Pret"};
         }
 
         cout << "1. Nume Produs: ";
         cin.ignore();
         getline(cin, numeProdus);
-        cout << "2. Preț Produs: ";
+        cout << "2. Pret Produs: ";
         cin >> pretProdus;
 
-        // Adăugăm produsul la date
+        // Adaugam produsul la date
         data.push_back({numeProdus, to_string(pretProdus)});
         break;
     }
@@ -96,7 +96,7 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         cout << "2. Unitati Ingredient/produsBrut (numarul de unitati): ";
         cin >> ingredientGramaj;
 
-        // Adăugăm ingredientul la date
+        // Adaugam ingredientul la date
         data.push_back({ingredientName, to_string(ingredientGramaj)});
         break;
     }
@@ -105,6 +105,6 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         return;
     }
 
-    // Scriem datele în fișierul CSV corespunzător
+    // Scriem datele in fisierul CSV corespunzator
     newCSV.writeCSV(finalpath, data, headers);
 }

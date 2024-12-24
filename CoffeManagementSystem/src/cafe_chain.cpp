@@ -4,53 +4,51 @@
 using namespace std;
 
 // Constructorul clasei Sediu
-Sediu::Sediu() : nmb_employees(0), nmb_clients(0) {} // Inițializare membri
+Sediu::Sediu() : nmb_employees(0), nmb_clients(0) {}
 
-// Adăugarea unui angajat
+// Adaugarea unui angajat
 void Sediu::addEmployee(const Employee &employee)
 {
     employees.push_back(employee);
     nmb_employees++;
 }
 
-// Setarea locației
+// Setarea locatiei
 void Sediu::setLocation(string location)
 {
     locatie = location;
 }
 
-// Setarea numărului de clienți
+// Setarea numarului de clienti
 void Sediu::setClients(int clients)
 {
     nmb_clients = clients;
 }
 
-// Returnează numărul de angajați
+// Returneaza numarul de angajati
 int Sediu::getNmbEmployees() const
 {
     return nmb_employees;
 }
 
-// Returnează locația
+// Returneaza locatia
 string Sediu::getLocatie() const
 {
     return locatie;
 }
 
-// Returnează numărul de clienți
+// Returneaza numarul de clienti
 int Sediu::getNmbClients() const
 {
     return nmb_clients;
 }
 
-// Implementarea metodei update din clasa Display
 void Display::update()
 {
     cout << "Number of employees: " << getNmbEmployees() << endl;
     cout << "Number of clients: " << getNmbClients() << endl;
 }
 
-// Implementarea metodei display din clasa Display
 void Display::display() const
 {
     cout << "Displaying information for the cafe: " << locatie << endl;
@@ -58,17 +56,17 @@ void Display::display() const
     cout << "Number of clients: " << getNmbClients() << endl;
 }
 
-// Adăugarea unei unități de cafea
+// Adaugarea unei unitati de cafea
 void CAFE::addCafeUnit(Sediu *center)
 {
-    if (center != nullptr) // Verificăm dacă pointerul este valid
+    if (center != nullptr) // Verificam daca pointerul este valid
     {
-        sedii.push_back(center); // Adăugăm sediul în vector
-        nmb_sedii++;             // Incrementăm numărul de sedii
+        sedii.push_back(center); // Adaugam sediul in vector
+        nmb_sedii++;             // Incrementam numarul de sedii
     }
 }
 
-// Afișarea tuturor locațiilor
+// Afisarea tuturor locatiilor
 void CAFE::displayAllSedii()
 {
     int i = 0;
@@ -82,7 +80,6 @@ void CAFE::displayAllSedii()
     }
 }
 
-// Afișarea locațiilor
 void CAFE::displayCafeLocations()
 {
     int i = 0;
@@ -93,15 +90,14 @@ void CAFE::displayCafeLocations()
     }
 }
 
-// Implementarea metodei getPtrUnit
 Sediu *CAFE::getPtrUnit(int optiune)
 {
     if (optiune < 1 || optiune > sedii.size())
     {
         cout << "Invalid option. Please choose a valid option." << endl;
-        return nullptr; // Returnează nullptr dacă opțiunea este invalidă
+        return nullptr;
     }
-    return sedii[optiune - 1]; // Returnează pointer la cafeneaua selectată
+    return sedii[optiune - 1]; // Returneaza pointer la cafeneaua selectata
 }
 
 int CAFE::getNmbSedii()

@@ -15,8 +15,8 @@ struct Ingredient
     Ingredient(const string &ingredientName, int ingredientGramaj)
         : name(ingredientName), gramaj(ingredientGramaj) {}
 
-    string getName() const; // metoda getName() ar trebui să fie const
-    int getGramaj() const;  // metoda getGramaj() ar trebui să fie const
+    string getName() const;
+    int getGramaj() const;
 };
 
 #endif // INGREDIENT_H

@@ -22,16 +22,12 @@ protected:
     string ora_sfarsit;
 
 public:
-    // Constructor
     Employee(const string &Ename, int Eage, double Esalary, const string &Eposition, const string &Elocation, const string &oraInceput, const string &oraSfarsit);
 
-    // Destructor virtual pentru polimorfism
     virtual ~Employee() {}
 
-    // Metodă virtuală pentru a afisa informațiile angajatului
     virtual void displayInfo() const;
 
-    // Getteri pentru fiecare atribut
     string getName() const;
     int getAge() const;
     double getSalary() const;
@@ -41,33 +37,27 @@ public:
     string getOraSfarsit() const;
 };
 
-// Clasa Barista
 class Barista : public Employee
 {
 public:
     Barista(const string &Ename, int Eage, double Esalary, const string &Eposition, const string &Elocation, const string &oraInceput, const string &oraSfarsit);
 
-    // Suprascrierea metodei displayInfo
     void displayInfo() const override;
 };
 
-// Clasa Manager
 class Manager : public Employee
 {
 public:
     Manager(const string &Ename, int Eage, double Esalary, const string &Eposition, const string &Elocation, const string &oraInceput, const string &oraSfarsit);
 
-    // Suprascrierea metodei displayInfo
     void displayInfo() const override;
 };
 
-// Clasa Ospatar
 class Ospatar : public Employee
 {
 public:
     Ospatar(const string &Ename, int Eage, double Esalary, const string &Eposition, const string &Elocation, const string &oraInceput, const string &oraSfarsit);
 
-    // Suprascrierea metodei displayInfo
     void displayInfo() const override;
 };
 

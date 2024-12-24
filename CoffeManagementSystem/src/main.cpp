@@ -65,7 +65,7 @@ int main()
             cafe->setLocation(locatie);
             cafeChain.addCafeUnit(cafe);
 
-            cout << "Noua cafenea din " << locatie << " a fost adăugată cu succes!" << endl;
+            cout << "Noua cafenea din " << locatie << " a fost adaugata cu succes!" << endl;
         }
         cout << "-----------------------------------------------------------------------------------" << endl;
 
@@ -155,7 +155,7 @@ int main()
                 }
                 else
                 {
-                    cout << "Opțiune invalidă!" << endl;
+                    cout << "Optiune invalida!" << endl;
                     feedback = false;
                 }
             }
@@ -165,7 +165,7 @@ int main()
             }
             else
             {
-                cout << "Opțiune invalidă!" << endl;
+                cout << "Optiune invalida!" << endl;
             }
 
             cout << "-----------------------------------------------------------------------------------" << endl;

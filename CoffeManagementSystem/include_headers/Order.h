@@ -10,19 +10,16 @@ using namespace std;
 class Order
 {
 private:
-    string clientName;              // Name of the client
-    vector<string> orderedProducts; // List of ordered products
-    double totalPrice;              // Total price of the order
+    string clientName;
+    vector<string> orderedProducts;
+    double totalPrice;
 
 public:
-    // Default constructor
     Order() : clientName(""), totalPrice(0.0) {}
 
-    // Parameterized constructor
     Order(const string &client, const vector<string> &products, double price)
         : clientName(client), orderedProducts(products), totalPrice(price) {}
 
-    // Method to display order information
     void displayInfo() const
     {
         cout << "Client: " << clientName << ", Ordered Products: ";
@@ -33,15 +30,15 @@ public:
         cout << ", Total Price: " << totalPrice << " RON" << endl;
     }
 
-    // Getter and Setter for clientName
+    // Getter and Setter pt clientName
     string getClientName() const { return clientName; }
     void setClientName(const string &client) { clientName = client; }
 
-    // Getter and Setter for orderedProducts
+    // Getter and Setter pt orderedProducts
     vector<string> getOrderedProducts() const { return orderedProducts; }
     void setOrderedProducts(const vector<string> &products) { orderedProducts = products; }
 
-    // Getter and Setter for totalPrice
+    // Getter and Setter pt totalPrice
     double getTotalPrice() const { return totalPrice; }
     void setTotalPrice(double price) { totalPrice = price; }
 
