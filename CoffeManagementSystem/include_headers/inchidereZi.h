@@ -18,7 +18,7 @@ public:
     float getVenituri(const std::string &locatie);
     float getCosturi(const std::string &locatie);
     float getProfit();
-    void inchidereZiCalcul(const std::string &locatie); // declararea functiei
+    void inchidereZiCalcul(const std::string &locatie);
 };
 
 #endif

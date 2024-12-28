@@ -24,7 +24,6 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
     string dataString;
     string finalpath;
 
-    // Declarati toate variabilele aici
     string numeAngajat, functie, locatie;
     int salariu = 0, varsta = 0;
     string oraInceput, oraSfarsit;
@@ -105,6 +104,5 @@ void Optiunea6::writeCSVFile(const string &basePath, const string &cafeLocation)
         return;
     }
 
-    // Scriem datele in fisierul CSV corespunzator
     newCSV.writeCSV(finalpath, data, headers);
 }

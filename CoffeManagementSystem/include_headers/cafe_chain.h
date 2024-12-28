@@ -26,6 +26,7 @@ public:
     int getNmbEmployees() const;
     int getNmbClients() const;
     string getLocatie() const;
+    void loadEmployeesFromFile(const string &fileName, const string &locatie);
 
     virtual void update() = 0;
     virtual void display() const = 0;

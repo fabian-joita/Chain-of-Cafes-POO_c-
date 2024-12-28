@@ -17,7 +17,6 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
     string numeClient, produseStr;
     float pretTotal = 0.0f;
 
-    // Citim datele din fișiere
     vector<vector<string>> produsePreturi = newCSV.readCSV(produsePreturiFile);
     vector<vector<string>> clientiFideliData = newCSV.readCSV(clientiFideliFile);
     vector<vector<string>> stoc = newCSV.readCSV(stocFile);
@@ -29,7 +28,6 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
         return;
     }
 
-    // Transformăm datele din CSV în obiecte Client
     vector<Client> clientiFideli;
     for (const auto &row : clientiFideliData)
     {
@@ -37,13 +35,11 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
         clientiFideli.push_back(Client::creeazaDinSir(line));
     }
 
-    // Setăm antetul dacă fișierul Comenzi.csv este gol
     if (newCSV.readCSV(finalpath).empty())
     {
         headers = {"Nume Client", "Produse Comandate", "Pret Total"};
     }
 
-    // Solicităm datele comenzii
     cout << "1. Nume Client: ";
     cin.ignore();
     getline(cin, numeClient);
@@ -54,13 +50,12 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
     string produs;
     bool comandaValida = true;
 
-    // Procesăm produsele din comandă
     while (getline(ss, produs, '+'))
     {
         bool produsGasit = false;
         float costProdus = 0.0f;
 
-        // Verificăm dacă produsul există în lista de prețuri
+        // verif daca produsul exista in meniu
         for (const auto &row : produsePreturi)
         {
             if (row[0] == produs)
@@ -69,7 +64,9 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
                 float pretProdus = stof(row[1]);
                 pretTotal += pretProdus;
 
-                // Verificăm stocul și actualizăm
+                // verificarea stocului si actualizarea acestuia
+                // fiecare produs are mai multe ingrediente
+                // daca un ingredient este indisponibil, atunci nu se poate plasa comanda
                 for (const auto &compozitieRow : compozitieProduse)
                 {
                     if (compozitieRow[0] == produs)
@@ -133,7 +130,6 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
 
     if (comandaValida)
     {
-        // Verificăm dacă clientul este fidel
         Client *client = nullptr;
         for (auto &c : clientiFideli)
         {
@@ -150,7 +146,7 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
             cout << "Client fidel! Reducere: " << reducere << "%" << endl;
             pretTotal -= (pretTotal * reducere / 100);
 
-            // Creștem reducerea dacă totalul este peste 10 lei
+            // crestem reducerea daca totalul este peste 10 lei
             if (pretTotal > 10)
             {
                 client->incrementReducere();
@@ -158,26 +154,24 @@ void adaugareComanda(const string &locatie, float *cheltuieli)
         }
         else
         {
-            // Adăugăm clientul ca nou client fidel
+            // adaugarea clientului nou ca si client fidel
             Client nouClient(numeClient, true, 1);
             clientiFideli.push_back(nouClient);
         }
 
-        // Adăugăm comanda în fișier
         data.push_back({numeClient, produseStr, to_string(pretTotal)});
         newCSV.writeCSV(finalpath, data, headers);
 
-        // Actualizăm stocul
         vector<string> headerStoc = {"Ingredient", "Unitati"};
         newCSV.rewriteCSV(stocFile, stoc, headerStoc);
 
-        // Salvăm lista actualizată de clienți fideli
+        // vector cu vectori de continut string reprezentand obiectul tranformat in sirul de caractere
         vector<vector<string>> clientiFideliSerialized;
+
+        // c => clientul fidel din vectorul de clienti fideli
         for (const auto &c : clientiFideli)
         {
-            clientiFideliSerialized.push_back({c.getName(),
-                                               c.isFidel() ? "1" : "0",
-                                               to_string(c.getProcentReducere())});
+            clientiFideliSerialized.push_back({c.getName(), c.isFidel() ? "1" : "0", to_string(c.getProcentReducere())});
         }
         newCSV.rewriteCSV(clientiFideliFile, clientiFideliSerialized, {"Nume Client", "Fidel", "Reducere"});
 

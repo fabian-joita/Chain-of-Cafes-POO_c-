@@ -13,4 +13,4 @@ public:
     static void writeCSVFile(const string &basePath, const string &cafeLocation);
 };
 
-#endif // OPTIUNEA6_H
+#endif

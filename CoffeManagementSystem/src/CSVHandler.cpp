@@ -39,11 +39,10 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
     if (!file.is_open())
     {
         cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
-        cerr << strerror(errno) << endl; // Afisam mesajul de eroare detaliat
+        cerr << strerror(errno) << endl;
         return;
     }
 
-    // Scriem titlurile coloanelor, doar daca sunt prezente
     if (!headers.empty())
     {
         for (size_t i = 0; i < headers.size(); ++i)
@@ -57,7 +56,6 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
         file << endl;
     }
 
-    // Scrierea datelor in fisier
     for (const auto &row : data)
     {
         for (size_t i = 0; i < row.size(); ++i)
@@ -84,7 +82,6 @@ void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data,
         return;
     }
 
-    // Scriem titlurile coloanelor, doar daca sunt prezente
     if (!headers.empty())
     {
         for (size_t i = 0; i < headers.size(); ++i)

@@ -201,6 +201,30 @@ src/cafe_chain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/cafe_chain.cpp.s
 .PHONY : src/cafe_chain.cpp.s
 
+src/evenimenteSpeciale.o: src/evenimenteSpeciale.cpp.o
+.PHONY : src/evenimenteSpeciale.o
+
+# target to build an object file
+src/evenimenteSpeciale.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/evenimenteSpeciale.cpp.o
+.PHONY : src/evenimenteSpeciale.cpp.o
+
+src/evenimenteSpeciale.i: src/evenimenteSpeciale.cpp.i
+.PHONY : src/evenimenteSpeciale.i
+
+# target to preprocess a source file
+src/evenimenteSpeciale.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/evenimenteSpeciale.cpp.i
+.PHONY : src/evenimenteSpeciale.cpp.i
+
+src/evenimenteSpeciale.s: src/evenimenteSpeciale.cpp.s
+.PHONY : src/evenimenteSpeciale.s
+
+# target to generate assembly for a file
+src/evenimenteSpeciale.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/evenimenteSpeciale.cpp.s
+.PHONY : src/evenimenteSpeciale.cpp.s
+
 src/inchidereZi.o: src/inchidereZi.cpp.o
 .PHONY : src/inchidereZi.o
 
@@ -339,6 +363,9 @@ help:
 	@echo "... src/cafe_chain.o"
 	@echo "... src/cafe_chain.i"
 	@echo "... src/cafe_chain.s"
+	@echo "... src/evenimenteSpeciale.o"
+	@echo "... src/evenimenteSpeciale.i"
+	@echo "... src/evenimenteSpeciale.s"
 	@echo "... src/inchidereZi.o"
 	@echo "... src/inchidereZi.i"
 	@echo "... src/inchidereZi.s"

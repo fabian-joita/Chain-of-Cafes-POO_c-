@@ -13,4 +13,4 @@ public:
     static void readCSVFile(const string &basePath);
 };
 
-#endif // OPTIUNEA7_H
+#endif

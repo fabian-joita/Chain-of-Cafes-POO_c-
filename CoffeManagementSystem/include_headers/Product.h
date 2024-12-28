@@ -27,4 +27,4 @@ public:
     void setPrice(double productPrice) { price = productPrice; }
 };
 
-#endif // PRODUCT_H
+#endif

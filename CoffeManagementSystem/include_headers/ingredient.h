@@ -19,4 +19,4 @@ struct Ingredient
     int getGramaj() const;
 };
 
-#endif // INGREDIENT_H
+#endif

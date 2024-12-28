@@ -9,6 +9,7 @@
 #include "schimbare_caracteristici.h"
 #include "adaugareComanda.h"
 #include "inchidereZi.h"
+#include "evenimenteSpeciale.h"
 
 using namespace std;
 
@@ -18,9 +19,8 @@ int main()
 
     float venituri = 0, cheltuieli = 0;
 
-    CAFE cafeChain; // Creating the CAFE object
+    CAFE cafeChain;
 
-    // Adding the five cafes as described in the problem
     Display *cafe1 = new Display();
     cafe1->setLocation("Bucuresti");
     cafeChain.addCafeUnit(cafe1);
@@ -48,27 +48,6 @@ int main()
         cout << "-----------------------------------------------------------------------------------" << endl;
 
         cout << "-----------------------------------------------------------------------------------" << endl;
-        cout << "Vrei sa adaugi o alta cafenea?" << endl;
-        cout << "1. DA" << endl;
-        cout << "2. NU" << endl;
-        int newCafe;
-        cin >> newCafe;
-
-        if (newCafe == 1)
-        {
-            cout << "Introduceti locatia noii cafenele: ";
-            string locatie;
-            cin >> locatie;
-
-            Display *cafe = new Display();
-            cafe->setLocation(locatie);
-            cafeChain.addCafeUnit(cafe);
-
-            cout << "Noua cafenea din " << locatie << " a fost adaugata cu succes!" << endl;
-        }
-        cout << "-----------------------------------------------------------------------------------" << endl;
-
-        cout << "-----------------------------------------------------------------------------------" << endl;
         cout << "Se afiseaza cafenelele disponibile: " << endl;
         cafeChain.displayCafeLocations();
         cout << "-----------------------------------------------------------------------------------" << endl;
@@ -81,9 +60,7 @@ int main()
             cout << "Cu ce cafenea vrei sa continui? (insert number)" << endl;
             cin >> optiune;
             Sediu *cafenea = cafeChain.getPtrUnit(optiune);
-
-            cout << "Ptr cafenea este: " << cafenea << endl;
-
+            cafenea->loadEmployeesFromFile("Angajati_Functii.csv", cafenea->getLocatie());
             cout << "Vrei sa accesezi aplicatia ca si angajat sau owner? 1-angajat/2-owner" << endl;
             int acces;
             cin >> acces;
@@ -91,7 +68,7 @@ int main()
             {
                 if (cafenea)
                 {
-                    cafenea->display(); // Display details about the selected cafe
+                    cafenea->display();
                     feedback = true;
 
                     int aceeasi_cafenea;
@@ -108,14 +85,23 @@ int main()
                         // vanzaribani - (nrcafele * $ + nrape * $ + ...)
                         // asa calculez venitul zilnic
                         // vanzari bani va aduna sumele din fisierul comenzi
+                        cout << "-----------------------------------------------------------------------------------" << endl;
                         cout << "Ce operatie doresti sa faci in aceasta cafenea? " << endl;
                         cout << "1. Schimbare detalii angajati produse_preturi / stocuri_ingrediente." << endl;
                         cout << "2. Adaugare comanda." << endl;
                         cout << "3. Inchidere zi (calcul venit = incasari - cheltuieli) => stergere comenzi." << endl;
+                        cout << "4. Gestionare Evenimente Speciale (adaugare, afisare, calcul venituri/costuri)." << endl;
                         cout << "5. Scrierea intr-un fisier csv cu date despre cafenea." << endl;
                         cout << "6. Citirea dintr-un fisier csv cu date despre cafenea." << endl;
+                        cout << "-----------------------------------------------------------------------------------" << endl;
+
+                        string pathEvenim = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+                        string FullPathEvenim = pathEvenim + cafenea->getLocatie() + "/evenimenteSpeciale.csv";
+
+                        ManagerEvenimente::getInstance()->getGestionare().citesteEvenimenteDinFisier(FullPathEvenim);
 
                         cin >> alegere;
+                        cout << "-----------------------------------------------------------------------------------" << endl;
                         if (alegere == 1)
                         {
                             cout << "Despre ce vrei sa schimbi detalii? (angajati/produse/stocuri)" << endl;
@@ -132,11 +118,92 @@ int main()
                             inchidereZi zi;
                             zi.inchidereZiCalcul(cafenea->getLocatie());
                         }
+                        else if (alegere == 4)
+                        {
+
+                            int optiuneEveniment;
+                            do
+                            {
+                                cout << "-----------------------------------------------------------------------------------" << endl;
+                                cout << "---------------- Gestionare Evenimente Speciale ----------------" << endl;
+                                cout << "1. Adauga Eveniment Special." << endl;
+                                cout << "2. Afiseaza toate Evenimentele Speciale." << endl;
+                                cout << "3. Calculeaza Venituri Totale din Evenimente." << endl;
+                                cout << "4. Calculeaza Costuri Totale din Evenimente." << endl;
+                                cout << "0. Inapoi la meniul principal." << endl;
+                                cout << "-----------------------------------------------------------------------------------" << endl;
+                                cin >> optiuneEveniment;
+                                cout << "-----------------------------------------------------------------------------------" << endl;
+
+                                if (optiuneEveniment == 1)
+                                {
+                                    string nume, data, interval;
+                                    float costOrganizare, costParticipare;
+                                    int locuriDisponibile, locuriOcupate;
+                                    string descriere;
+
+                                    cout << "-----------------------------------------------------------------------------------" << endl;
+                                    cout << "Introduceti numele evenimentului: ";
+                                    cin.ignore();
+                                    getline(cin, nume);
+
+                                    cout << "Introduceti data evenimentului (YYYY-MM-DD): ";
+                                    cin >> data;
+
+                                    cout << "Introduceti intervalul orar (HH:MM-HH:MM): ";
+                                    cin >> interval;
+
+                                    cout << "Introduceti costul de organizare: ";
+                                    cin >> costOrganizare;
+
+                                    cout << "Introduceti costul de participare per persoana: ";
+                                    cin >> costParticipare;
+
+                                    cout << "Introduceti numarul de locuri disponibile: ";
+                                    cin >> locuriDisponibile;
+
+                                    cout << "Introduceti numarul de locuri ocupate: ";
+                                    cin >> locuriOcupate;
+
+                                    cout << "introduceti descriere eveniment: ";
+                                    cin.ignore();
+                                    getline(cin, descriere);
+                                    cout << "-----------------------------------------------------------------------------------" << endl;
+
+                                    Eveniment eveniment(nume, data, interval, costOrganizare, costParticipare, locuriDisponibile, locuriOcupate, descriere);
+                                    ManagerEvenimente::getInstance()->getGestionare().salveazaEvenimenteInFisier(FullPathEvenim, eveniment);
+                                    ManagerEvenimente::getInstance()->getGestionare().citesteEvenimenteDinFisier(FullPathEvenim);
+
+                                    cout << "Evenimentul a fost adaugat cu succes!" << endl;
+                                }
+                                else if (optiuneEveniment == 2)
+                                {
+                                    cout << "-----------------------------------------------------------------------------------" << endl;
+                                    cout << "---------------- Lista Evenimentelor Speciale ----------------" << endl;
+
+                                    ManagerEvenimente::getInstance()->getGestionare().afiseazaToateEvenimentele();
+                                    cout << "-----------------------------------------------------------------------------------" << endl;
+                                }
+                                else if (optiuneEveniment == 3)
+                                {
+                                    float venituriEvenimente = ManagerEvenimente::getInstance()->getGestionare().calculVenitTotal();
+                                    cout << "Veniturile totale din evenimente speciale: " << venituriEvenimente << " RON" << endl;
+                                }
+                                else if (optiuneEveniment == 4)
+                                {
+                                    float costuriEvenimente = ManagerEvenimente::getInstance()->getGestionare().calculCostTotal();
+                                    cout << "Costurile totale ale evenimentelor speciale: " << costuriEvenimente << " RON" << endl;
+                                }
+                                else if (optiuneEveniment != 0)
+                                {
+                                    cout << "Optiune invalida!" << endl;
+                                }
+                            } while (optiuneEveniment != 0);
+                        }
                         else if (alegere == 5)
                         {
                             string path = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
 
-                            // Pass the populated containers to writeCSVFile
                             Optiunea6::writeCSVFile(path, cafenea->getLocatie());
                         }
                         else if (alegere == 6)
@@ -166,7 +233,7 @@ int main()
             }
             else if (acces == 2)
             {
-                // Owner-related logic can be implemented here
+                // owner logic
             }
             else
             {

@@ -18,6 +18,7 @@ file(GLOB SOURCES
     ${SRC_DIR}/optiunea7.cpp
     ${SRC_DIR}/ingredient.cpp
     ${SRC_DIR}/inchidereZi.cpp
+    ${SRC_DIR}/evenimenteSpeciale.cpp
 )
 
 #crearea executabilului

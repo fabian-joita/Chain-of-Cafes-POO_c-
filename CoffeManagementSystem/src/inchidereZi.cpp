@@ -1,6 +1,23 @@
 #include "inchidereZi.h"
+#include "evenimenteSpeciale.h"
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
+
+string getCurrentDate()
+{
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    ostringstream dateStream;
+    dateStream << 1900 + ltm->tm_year << "-"
+               << setw(2) << setfill('0') << 1 + ltm->tm_mon << "-"
+               << setw(2) << setfill('0') << ltm->tm_mday;
+
+    return dateStream.str();
+}
 
 float inchidereZi::getVenituri(const string &locatie)
 {
@@ -97,13 +114,75 @@ void inchidereZi::inchidereZiCalcul(const string &locatie)
 {
     venituri = getVenituri(locatie);
     cheltuieli = getCosturi(locatie);
+
+    string currentDate = getCurrentDate();
+
+    float venituriEvenimente = 0.0f;
+    float costuriEvenimente = 0.0f;
+
+    auto &evenimente = ManagerEvenimente::getInstance()->getGestionare().getToateEvenimentele();
+
+    for (const auto &eveniment : evenimente)
+    {
+        if (eveniment.getDataEveniment() == currentDate)
+        {
+            venituriEvenimente += eveniment.calculVenitEveniment();
+            costuriEvenimente += eveniment.getCostOrganizare();
+        }
+    }
+
+    venituri += venituriEvenimente;
+    cheltuieli += costuriEvenimente;
+
     profit = getProfit();
 
-    cout << "Venituri totale: " << venituri << " RON" << endl;
-    cout << "Cheltuieli totale: " << cheltuieli << " RON" << endl;
+    cout << "Venituri din comenzi: " << venituri - venituriEvenimente << " RON" << endl;
+    cout << "Costuri din comenzi: " << cheltuieli - costuriEvenimente << " RON" << endl;
+
+    cout << "Venituri totale (inclusiv evenimente): " << venituri << " RON" << endl;
+    cout << "Cheltuieli totale (inclusiv evenimente): " << cheltuieli << " RON" << endl;
     cout << "Profitul zilei: " << profit << " RON" << endl;
 
+    if (venituriEvenimente > 0 || costuriEvenimente > 0)
+    {
+        cout << "Venituri din evenimente speciale: " << venituriEvenimente << " RON" << endl;
+        cout << "Costuri din evenimente speciale: " << costuriEvenimente << " RON" << endl;
+    }
+
     string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+    string raportPath = basePath + locatie + "/raportZ.csv";
+
+    ifstream checkFile(raportPath);
+    bool isFileEmpty = checkFile.peek() == ifstream::traits_type::eof();
+    checkFile.close();
+
+    ofstream raportFile(raportPath, ios::app);
+
+    if (raportFile.is_open())
+    {
+        if (isFileEmpty)
+        {
+            raportFile << "Data,Locatie,Venituri din comenzi,Costuri din comenzi,Venituri totale,Cheltuieli totale,Profit,Venituri din evenimente speciale,Costuri din evenimente speciale\n";
+        }
+
+        raportFile << currentDate << ","
+                   << locatie << ","
+                   << venituri - venituriEvenimente << ","
+                   << cheltuieli - costuriEvenimente << ","
+                   << venituri << ","
+                   << cheltuieli << ","
+                   << profit << ","
+                   << venituriEvenimente << ","
+                   << costuriEvenimente << "\n";
+
+        cout << "Detaliile au fost salvate in fisierul raportZ.csv." << endl;
+        raportFile.close();
+    }
+    else
+    {
+        cout << "Eroare la deschiderea fisierului raportZ.csv pentru salvare." << endl;
+    }
+
     string finalPath = basePath + locatie + "/Comenzi.csv";
 
     ofstream file(finalPath, ofstream::trunc);
