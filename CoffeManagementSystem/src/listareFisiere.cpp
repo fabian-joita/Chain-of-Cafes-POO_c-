@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <string>
+#include "listareFisiere.h"
 
 namespace fs = std::__fs::filesystem;
 using namespace std;

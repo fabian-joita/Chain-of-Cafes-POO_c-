@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Globals.h"
 
 class inchidereZi
 {

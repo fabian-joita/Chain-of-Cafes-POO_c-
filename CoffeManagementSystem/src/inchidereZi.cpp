@@ -21,8 +21,9 @@ string getCurrentDate()
 
 float inchidereZi::getVenituri(const string &locatie)
 {
-    string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
-    string finalPath = basePath + locatie + "/Comenzi.csv";
+    string basePath = (languageOption == "EN") ? "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES_ENGLISH"
+                                               : "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+    string finalPath = (languageOption == "EN") ? basePath + locatie + "/Orders.csv" : basePath + locatie + "/Comenzi.csv";
 
     float venituri = 0.0f;
     CSV newCSV;
@@ -31,7 +32,7 @@ float inchidereZi::getVenituri(const string &locatie)
 
     if (!file.is_open())
     {
-        cout << "Eroare la deschiderea fisierului " << finalPath << endl;
+        cout << ((languageOption == "EN") ? "Error opening file " : "Eroare la deschiderea fisierului ") << finalPath << endl;
         return 0.0f;
     }
 
@@ -39,7 +40,7 @@ float inchidereZi::getVenituri(const string &locatie)
 
     if (comenzi.empty())
     {
-        cout << "Nu au fost gasite comenzi in fisier." << endl;
+        cout << ((languageOption == "EN") ? "No orders found in the file." : "Nu au fost gasite comenzi in fisier.") << endl;
         return 0.0f;
     }
 
@@ -53,9 +54,10 @@ float inchidereZi::getVenituri(const string &locatie)
 
 float inchidereZi::getCosturi(const string &locatie)
 {
-    string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
-    string comenziPath = basePath + locatie + "/Comenzi.csv";
-    string costPreparareFile = basePath + "costPreparare&Cumparare.csv";
+    string basePath = (languageOption == "EN") ? "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES_ENGLISH"
+                                               : "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+    string comenziPath = (languageOption == "EN") ? basePath + locatie + "/Orders.csv" : basePath + locatie + "/Comenzi.csv";
+    string costPreparareFile = (languageOption == "EN") ? basePath + "costPreparation&Purchase.csv" : basePath + "costPreparare&Cumparare.csv";
 
     float costuri = 0.0f;
     CSV newCSV;
@@ -65,7 +67,7 @@ float inchidereZi::getCosturi(const string &locatie)
 
     if (comenzi.empty() || costuriPreparare.empty())
     {
-        cout << "Eroare: Nu exista date in fisierele necesare pentru calcularea cheltuielilor." << endl;
+        cout << ((languageOption == "EN") ? "Error: No data in the required files for calculating costs." : "Eroare: Nu exista date in fisierele necesare pentru calcularea cheltuielilor.") << endl;
         return 0.0f;
     }
 
@@ -73,7 +75,7 @@ float inchidereZi::getCosturi(const string &locatie)
     {
         if (comanda.size() < 2)
         {
-            cerr << "Eroare la interpretarea unei comenzi." << endl;
+            cerr << ((languageOption == "EN") ? "Error interpreting an order." : "Eroare la interpretarea unei comenzi.") << endl;
             continue;
         }
 
@@ -96,7 +98,7 @@ float inchidereZi::getCosturi(const string &locatie)
 
             if (!costGasit)
             {
-                cout << "Eroare: Nu exista cost de preparare pentru produsul '" << produs << "'." << endl;
+                cout << ((languageOption == "EN") ? "Error: No preparation cost found for product '" : "Eroare: Nu exista cost de preparare pentru produsul '") << produs << "'" << endl;
             }
         }
     }
@@ -136,21 +138,22 @@ void inchidereZi::inchidereZiCalcul(const string &locatie)
 
     profit = getProfit();
 
-    cout << "Venituri din comenzi: " << venituri - venituriEvenimente << " RON" << endl;
-    cout << "Costuri din comenzi: " << cheltuieli - costuriEvenimente << " RON" << endl;
+    cout << ((languageOption == "EN") ? "Order revenues: " : "Venituri din comenzi: ") << venituri - venituriEvenimente << " RON" << endl;
+    cout << ((languageOption == "EN") ? "Order costs: " : "Costuri din comenzi: ") << cheltuieli - costuriEvenimente << " RON" << endl;
 
-    cout << "Venituri totale (inclusiv evenimente): " << venituri << " RON" << endl;
-    cout << "Cheltuieli totale (inclusiv evenimente): " << cheltuieli << " RON" << endl;
-    cout << "Profitul zilei: " << profit << " RON" << endl;
+    cout << ((languageOption == "EN") ? "Total revenues (including events): " : "Venituri totale (inclusiv evenimente): ") << venituri << " RON" << endl;
+    cout << ((languageOption == "EN") ? "Total costs (including events): " : "Cheltuieli totale (inclusiv evenimente): ") << cheltuieli << " RON" << endl;
+    cout << ((languageOption == "EN") ? "Profit of the day: " : "Profitul zilei: ") << profit << " RON" << endl;
 
     if (venituriEvenimente > 0 || costuriEvenimente > 0)
     {
-        cout << "Venituri din evenimente speciale: " << venituriEvenimente << " RON" << endl;
-        cout << "Costuri din evenimente speciale: " << costuriEvenimente << " RON" << endl;
+        cout << ((languageOption == "EN") ? "Special event revenues: " : "Venituri din evenimente speciale: ") << venituriEvenimente << " RON" << endl;
+        cout << ((languageOption == "EN") ? "Special event costs: " : "Costuri din evenimente speciale: ") << costuriEvenimente << " RON" << endl;
     }
 
-    string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
-    string raportPath = basePath + locatie + "/raportZ.csv";
+    string basePath = (languageOption == "EN") ? "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES_ENGLISH"
+                                               : "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
+    string raportPath = (languageOption == "EN") ? basePath + locatie + "/ZReport.csv" : basePath + locatie + "/raportZ.csv";
 
     ifstream checkFile(raportPath);
     bool isFileEmpty = checkFile.peek() == ifstream::traits_type::eof();
@@ -162,7 +165,7 @@ void inchidereZi::inchidereZiCalcul(const string &locatie)
     {
         if (isFileEmpty)
         {
-            raportFile << "Data,Locatie,Venituri din comenzi,Costuri din comenzi,Venituri totale,Cheltuieli totale,Profit,Venituri din evenimente speciale,Costuri din evenimente speciale\n";
+            raportFile << ((languageOption == "EN") ? "Date,Location,Order revenues,Order costs,Total revenues,Total costs,Profit,Special event revenues,Special event costs\n" : "Data,Locatie,Venituri din comenzi,Costuri din comenzi,Venituri totale,Cheltuieli totale,Profit,Venituri din evenimente speciale,Costuri din evenimente speciale\n");
         }
 
         raportFile << currentDate << ","
@@ -175,24 +178,24 @@ void inchidereZi::inchidereZiCalcul(const string &locatie)
                    << venituriEvenimente << ","
                    << costuriEvenimente << "\n";
 
-        cout << "Detaliile au fost salvate in fisierul raportZ.csv." << endl;
+        cout << ((languageOption == "EN") ? "The details have been saved in the raportZ.csv file." : "Detaliile au fost salvate in fisierul raportZ.csv.") << endl;
         raportFile.close();
     }
     else
     {
-        cout << "Eroare la deschiderea fisierului raportZ.csv pentru salvare." << endl;
+        cout << ((languageOption == "EN") ? "Error opening the raportZ.csv file for saving." : "Eroare la deschiderea fisierului raportZ.csv pentru salvare.") << endl;
     }
 
-    string finalPath = basePath + locatie + "/Comenzi.csv";
+    string finalPath = (languageOption == "EN") ? basePath + locatie + "/Orders.csv" : basePath + locatie + "/Comenzi.csv";
 
     ofstream file(finalPath, ofstream::trunc);
     if (file.is_open())
     {
-        cout << "Comenzile au fost sterse pentru ziua curenta." << endl;
+        cout << ((languageOption == "EN") ? "The orders have been deleted for the current day." : "Comenzile au fost sterse pentru ziua curenta.") << endl;
         file.close();
     }
     else
     {
-        cout << "Eroare la deschiderea fisierului pentru stergere." << endl;
+        cout << ((languageOption == "EN") ? "Error opening the file for deletion." : "Eroare la deschiderea fisierului pentru stergere.") << endl;
     }
 }

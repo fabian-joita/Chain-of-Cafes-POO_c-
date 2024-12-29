@@ -1,4 +1,8 @@
 #include "Employee.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 Employee::Employee(const string &Ename, int Eage, double Esalary, const string &Eposition, const string &Elocation, const string &oraInceput, const string &oraSfarsit)
 {
@@ -30,22 +34,56 @@ string Employee::getOraSfarsit() const { return ora_sfarsit; }
 
 void Employee::displayInfo() const
 {
-    cout << "Name: " << name << ", Age: " << age << ", Salary: " << salary
-         << ", Position: " << position << ", Location: " << location << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Name: " << name << ", Age: " << age << ", Salary: " << salary
+             << ", Position: " << position << ", Location: " << location << endl;
+    }
+    else
+    {
+        cout << "Nume: " << name << ", Varsta: " << age << ", Salariu: " << salary
+             << ", Functie: " << position << ", Locatie: " << location << endl;
+    }
 }
 
 void Barista::displayInfo() const
 {
-    cout << "Barista - Name: " << name << ", Age: " << age << ", Salary: " << salary
-         << ", Position: " << position << ", Location: " << location << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Barista - Name: " << name << ", Age: " << age << ", Salary: " << salary
+             << ", Position: " << position << ", Location: " << location << endl;
+    }
+    else
+    {
+        cout << "Barista - Nume: " << name << ", Varsta: " << age << ", Salariu: " << salary
+             << ", Functie: " << position << ", Locatie: " << location << endl;
+    }
 }
+
 void Manager::displayInfo() const
 {
-    cout << "Manager - Name: " << name << ", Age: " << age << ", Salary: " << salary
-         << ", Position: " << position << ", Location: " << location << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Manager - Name: " << name << ", Age: " << age << ", Salary: " << salary
+             << ", Position: " << position << ", Location: " << location << endl;
+    }
+    else
+    {
+        cout << "Manager - Nume: " << name << ", Varsta: " << age << ", Salariu: " << salary
+             << ", Functie: " << position << ", Locatie: " << location << endl;
+    }
 }
+
 void Ospatar::displayInfo() const
 {
-    cout << "Ospatar - Name: " << name << ", Age: " << age << ", Salary: " << salary
-         << ", Position: " << position << ", Location: " << location << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Waiter - Name: " << name << ", Age: " << age << ", Salary: " << salary
+             << ", Position: " << position << ", Location: " << location << endl;
+    }
+    else
+    {
+        cout << "Ospatar - Nume: " << name << ", Varsta: " << age << ", Salariu: " << salary
+             << ", Functie: " << position << ", Locatie: " << location << endl;
+    }
 }

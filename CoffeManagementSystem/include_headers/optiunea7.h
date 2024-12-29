@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include "CSVHandler.h"
+#include "Globals.h"
+
 using namespace std;
 
 class Optiunea7

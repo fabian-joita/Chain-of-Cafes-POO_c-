@@ -11,8 +11,9 @@ Sediu::Sediu() : nmb_employees(0), nmb_clients(0) {}
 
 void Sediu::loadEmployeesFromFile(const string &fileName, const string &locatie)
 {
-    string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/CSV_FILES/";
-    string finalPath = basePath + locatie + "/" + fileName;
+    string basePath = "/Users/joitafabian/Facultate_C++_KT/Colocviu_CPP/Chain-of-Cafes-POO_c-/CoffeManagementSystem/";
+    string csvPath = (languageOption == "EN") ? basePath + "CSV_FILES_ENGLISH/" : basePath + "CSV_FILES/";
+    string finalPath = csvPath + locatie + "/" + fileName;
 
     ifstream file(finalPath);
     if (!file.is_open())
@@ -22,6 +23,9 @@ void Sediu::loadEmployeesFromFile(const string &fileName, const string &locatie)
     }
 
     string line;
+
+    getline(file, line);
+
     while (getline(file, line))
     {
         stringstream ss(line);
@@ -80,15 +84,32 @@ int Sediu::getNmbClients() const
 
 void Display::update()
 {
-    cout << "Number of employees: " << getNmbEmployees() << endl;
-    cout << "Number of clients: " << getNmbClients() << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Number of employees: " << getNmbEmployees() << endl;
+        cout << "Number of clients: " << getNmbClients() << endl;
+    }
+    else
+    {
+        cout << "Numar de angajati: " << getNmbEmployees() << endl;
+        cout << "Numar de clienti: " << getNmbClients() << endl;
+    }
 }
 
 void Display::display() const
 {
-    cout << "Displaying information for the cafe: " << locatie << endl;
-    cout << "Number of employees: " << getNmbEmployees() << endl;
-    cout << "Number of clients: " << getNmbClients() << endl;
+    if (languageOption == "EN")
+    {
+        cout << "Displaying information for the cafe: " << locatie << endl;
+        cout << "Number of employees: " << getNmbEmployees() << endl;
+        cout << "Number of clients: " << getNmbClients() << endl;
+    }
+    else
+    {
+        cout << "Afisarea informatiilor pentru cafenea: " << locatie << endl;
+        cout << "Numar de angajati: " << getNmbEmployees() << endl;
+        cout << "Numar de clienti: " << getNmbClients() << endl;
+    }
 }
 
 void CAFE::addCafeUnit(Sediu *center)
@@ -106,10 +127,20 @@ void CAFE::displayAllSedii()
     for (Sediu *sediu : sedii)
     {
         i++;
-        cout << "Cafe nmb: " << i << endl;
-        cout << "Number of employees: " << sediu->getNmbEmployees() << endl;
-        cout << "Number of clients: " << sediu->getNmbClients() << endl;
-        cout << "Location: " << sediu->getLocatie() << endl;
+        if (languageOption == "EN")
+        {
+            cout << "Cafe number: " << i << endl;
+            cout << "Number of employees: " << sediu->getNmbEmployees() << endl;
+            cout << "Number of clients: " << sediu->getNmbClients() << endl;
+            cout << "Location: " << sediu->getLocatie() << endl;
+        }
+        else
+        {
+            cout << "Cafenea numarul: " << i << endl;
+            cout << "Numar de angajati: " << sediu->getNmbEmployees() << endl;
+            cout << "Numar de clienti: " << sediu->getNmbClients() << endl;
+            cout << "Locatie: " << sediu->getLocatie() << endl;
+        }
     }
 }
 
@@ -119,7 +150,14 @@ void CAFE::displayCafeLocations()
     for (Sediu *sediu : sedii)
     {
         i++;
-        cout << "Cafe number " << i << " in " << sediu->getLocatie() << endl;
+        if (languageOption == "EN")
+        {
+            cout << "Cafe number " << i << " in " << sediu->getLocatie() << endl;
+        }
+        else
+        {
+            cout << "Cafenea numarul " << i << " in " << sediu->getLocatie() << endl;
+        }
     }
 }
 
@@ -127,7 +165,10 @@ Sediu *CAFE::getPtrUnit(int optiune)
 {
     if (optiune < 1 || optiune > sedii.size())
     {
-        cout << "Invalid option. Please choose a valid option." << endl;
+        if (languageOption == "EN")
+            cout << "Invalid option. Please choose a valid option." << endl;
+        else
+            cout << "Optiune invalida. Te rugam sa alegi o optiune valida." << endl;
         return nullptr;
     }
     return sedii[optiune - 1];

@@ -1,4 +1,10 @@
 #include "CSVHandler.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <cstring>
+
 using namespace std;
 
 vector<vector<string>> CSV::readCSV(const string &filename)
@@ -9,7 +15,14 @@ vector<vector<string>> CSV::readCSV(const string &filename)
 
     if (!file.is_open())
     {
-        cerr << "Eroare la deschiderea fisierului " << filename << endl;
+        if (languageOption == "EN")
+        {
+            cerr << "Error opening file " << filename << endl;
+        }
+        else
+        {
+            cerr << "Eroare la deschiderea fisierului " << filename << endl;
+        }
         return data;
     }
 
@@ -38,8 +51,16 @@ void CSV::writeCSV(const string &filename, const vector<vector<string>> &data, c
     ofstream file(filename, ios::app); // Deschidem fisierul in mod de adaugare
     if (!file.is_open())
     {
-        cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
-        cerr << strerror(errno) << endl;
+        if (languageOption == "EN")
+        {
+            cerr << "Error opening file for writing: " << filename << endl;
+            cerr << strerror(errno) << endl;
+        }
+        else
+        {
+            cerr << "Eroare la deschiderea fisierului pentru scriere: " << filename << endl;
+            cerr << strerror(errno) << endl;
+        }
         return;
     }
 
@@ -77,8 +98,16 @@ void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data,
     ofstream file(filename); // Deschidem fisierul in mod de rescriere
     if (!file.is_open())
     {
-        cerr << "Eroare la deschiderea fisierului pentru rescriere: " << filename << endl;
-        cerr << strerror(errno) << endl;
+        if (languageOption == "EN")
+        {
+            cerr << "Error opening file for rewriting: " << filename << endl;
+            cerr << strerror(errno) << endl;
+        }
+        else
+        {
+            cerr << "Eroare la deschiderea fisierului pentru rescriere: " << filename << endl;
+            cerr << strerror(errno) << endl;
+        }
         return;
     }
 
@@ -95,7 +124,6 @@ void CSV::rewriteCSV(const string &filename, const vector<vector<string>> &data,
         file << endl;
     }
 
-    // Scrierea datelor in fisier (vechi si noi)
     for (const auto &row : data)
     {
         for (size_t i = 0; i < row.size(); ++i)

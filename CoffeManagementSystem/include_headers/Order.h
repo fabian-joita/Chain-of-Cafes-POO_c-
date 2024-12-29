@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "Globals.h"
 
 using namespace std;
 
@@ -42,7 +43,6 @@ public:
     double getTotalPrice() const { return totalPrice; }
     void setTotalPrice(double price) { totalPrice = price; }
 
-    // Operator<< for easy printing of the order
     friend ostream &operator<<(ostream &os, const Order &order)
     {
         os << "Client: " << order.clientName << ", Ordered Products: ";

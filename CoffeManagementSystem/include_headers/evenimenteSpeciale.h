@@ -6,10 +6,17 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include "Globals.h"
 
 using namespace std;
 
-// Clasa Eveniment
+/*Encapsularea : Toate atributele(cum ar fi numeEveniment, costOrganizare, etc.)
+ sunt private si sunt accesibile doar prin metodele getter si setter.Acest lucru
+ protejeaza datele interne ale obiectului, prevenind accesul direct din exterior si
+ asigurand controlul asupra modului in care sunt modificate valorile acestora.
+
+Abstractie : Clasa Eveniment ascunde detaliile
+ implementarii evenimentelor si ofera doar metode pentru manipularea si accesul la atributele acestora.*/
 class Eveniment
 {
 private:
@@ -55,6 +62,11 @@ public:
 };
 
 // Template pentru GestionareEvenimente
+// Template-uri: GestionareEvenimente este o clasa templatata, ceea ce inseamna ca permite
+// gestionarea unui tip generic de obiecte (in acest caz, Eveniment). Astfel, putem folosi
+// aceeasi clasa pentru a lucra cu tipuri diferite de evenimente sau obiecte, fara a fi nevoie
+// sa refacem clasa pentru fiecare tip in parte.
+
 template <typename T>
 class GestionareEvenimente
 {
@@ -185,6 +197,11 @@ void GestionareEvenimente<T>::citesteEvenimenteDinFisier(const string &caleFisie
 }
 
 // Singleton pentru ManagerEvenimente
+/*Singleton : Clasa ManagerEvenimente implementeaza un pattern Singleton, ceea ce inseamna
+ca aceasta clasa va avea doar o singura instanta in intreaga aplicatie, accesibila prin metoda
+ getInstance().Acest pattern este folosit pentru a controla accesul la o resursa comuna, in
+ acest caz, un manager de evenimente global.
+*/
 class ManagerEvenimente
 {
 private:

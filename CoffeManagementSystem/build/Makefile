@@ -177,6 +177,30 @@ src/Employee.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Employee.cpp.s
 .PHONY : src/Employee.cpp.s
 
+src/adaugareComanda.o: src/adaugareComanda.cpp.o
+.PHONY : src/adaugareComanda.o
+
+# target to build an object file
+src/adaugareComanda.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/adaugareComanda.cpp.o
+.PHONY : src/adaugareComanda.cpp.o
+
+src/adaugareComanda.i: src/adaugareComanda.cpp.i
+.PHONY : src/adaugareComanda.i
+
+# target to preprocess a source file
+src/adaugareComanda.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/adaugareComanda.cpp.i
+.PHONY : src/adaugareComanda.cpp.i
+
+src/adaugareComanda.s: src/adaugareComanda.cpp.s
+.PHONY : src/adaugareComanda.s
+
+# target to generate assembly for a file
+src/adaugareComanda.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/adaugareComanda.cpp.s
+.PHONY : src/adaugareComanda.cpp.s
+
 src/cafe_chain.o: src/cafe_chain.cpp.o
 .PHONY : src/cafe_chain.o
 
@@ -273,6 +297,30 @@ src/ingredient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/ingredient.cpp.s
 .PHONY : src/ingredient.cpp.s
 
+src/listareFisiere.o: src/listareFisiere.cpp.o
+.PHONY : src/listareFisiere.o
+
+# target to build an object file
+src/listareFisiere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/listareFisiere.cpp.o
+.PHONY : src/listareFisiere.cpp.o
+
+src/listareFisiere.i: src/listareFisiere.cpp.i
+.PHONY : src/listareFisiere.i
+
+# target to preprocess a source file
+src/listareFisiere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/listareFisiere.cpp.i
+.PHONY : src/listareFisiere.cpp.i
+
+src/listareFisiere.s: src/listareFisiere.cpp.s
+.PHONY : src/listareFisiere.s
+
+# target to generate assembly for a file
+src/listareFisiere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/listareFisiere.cpp.s
+.PHONY : src/listareFisiere.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -345,6 +393,54 @@ src/optiunea7.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/optiunea7.cpp.s
 .PHONY : src/optiunea7.cpp.s
 
+src/parteInEngleza/mainPartInEngl.o: src/parteInEngleza/mainPartInEngl.cpp.o
+.PHONY : src/parteInEngleza/mainPartInEngl.o
+
+# target to build an object file
+src/parteInEngleza/mainPartInEngl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parteInEngleza/mainPartInEngl.cpp.o
+.PHONY : src/parteInEngleza/mainPartInEngl.cpp.o
+
+src/parteInEngleza/mainPartInEngl.i: src/parteInEngleza/mainPartInEngl.cpp.i
+.PHONY : src/parteInEngleza/mainPartInEngl.i
+
+# target to preprocess a source file
+src/parteInEngleza/mainPartInEngl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parteInEngleza/mainPartInEngl.cpp.i
+.PHONY : src/parteInEngleza/mainPartInEngl.cpp.i
+
+src/parteInEngleza/mainPartInEngl.s: src/parteInEngleza/mainPartInEngl.cpp.s
+.PHONY : src/parteInEngleza/mainPartInEngl.s
+
+# target to generate assembly for a file
+src/parteInEngleza/mainPartInEngl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/parteInEngleza/mainPartInEngl.cpp.s
+.PHONY : src/parteInEngleza/mainPartInEngl.cpp.s
+
+src/schimbare_caracteristici.o: src/schimbare_caracteristici.cpp.o
+.PHONY : src/schimbare_caracteristici.o
+
+# target to build an object file
+src/schimbare_caracteristici.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/schimbare_caracteristici.cpp.o
+.PHONY : src/schimbare_caracteristici.cpp.o
+
+src/schimbare_caracteristici.i: src/schimbare_caracteristici.cpp.i
+.PHONY : src/schimbare_caracteristici.i
+
+# target to preprocess a source file
+src/schimbare_caracteristici.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/schimbare_caracteristici.cpp.i
+.PHONY : src/schimbare_caracteristici.cpp.i
+
+src/schimbare_caracteristici.s: src/schimbare_caracteristici.cpp.s
+.PHONY : src/schimbare_caracteristici.s
+
+# target to generate assembly for a file
+src/schimbare_caracteristici.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/schimbare_caracteristici.cpp.s
+.PHONY : src/schimbare_caracteristici.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -360,6 +456,9 @@ help:
 	@echo "... src/Employee.o"
 	@echo "... src/Employee.i"
 	@echo "... src/Employee.s"
+	@echo "... src/adaugareComanda.o"
+	@echo "... src/adaugareComanda.i"
+	@echo "... src/adaugareComanda.s"
 	@echo "... src/cafe_chain.o"
 	@echo "... src/cafe_chain.i"
 	@echo "... src/cafe_chain.s"
@@ -372,6 +471,9 @@ help:
 	@echo "... src/ingredient.o"
 	@echo "... src/ingredient.i"
 	@echo "... src/ingredient.s"
+	@echo "... src/listareFisiere.o"
+	@echo "... src/listareFisiere.i"
+	@echo "... src/listareFisiere.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
@@ -381,6 +483,12 @@ help:
 	@echo "... src/optiunea7.o"
 	@echo "... src/optiunea7.i"
 	@echo "... src/optiunea7.s"
+	@echo "... src/parteInEngleza/mainPartInEngl.o"
+	@echo "... src/parteInEngleza/mainPartInEngl.i"
+	@echo "... src/parteInEngleza/mainPartInEngl.s"
+	@echo "... src/schimbare_caracteristici.o"
+	@echo "... src/schimbare_caracteristici.i"
+	@echo "... src/schimbare_caracteristici.s"
 .PHONY : help
 
 

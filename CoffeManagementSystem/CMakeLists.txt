@@ -19,6 +19,11 @@ file(GLOB SOURCES
     ${SRC_DIR}/ingredient.cpp
     ${SRC_DIR}/inchidereZi.cpp
     ${SRC_DIR}/evenimenteSpeciale.cpp
+    ${SRC_DIR}/listareFisiere.cpp
+    ${SRC_DIR}/parteInEngleza/mainPartInEngl.cpp
+    ${SRC_DIR}/schimbare_caracteristici.cpp
+    ${SRC_DIR}/adaugareComanda.cpp
+    
 )
 
 #crearea executabilului

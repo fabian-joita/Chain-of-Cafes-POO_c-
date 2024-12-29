@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include "Globals.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ using namespace std;
 class Client
 {
 private:
+    // incapsulare
     string name;
     bool fidel;
     int procentReducere;
@@ -43,11 +45,13 @@ public:
 
     void setFidel(bool status) { fidel = status; }
 
+    // Conversia unui obiect Client intr-un sir de caractere
     string convertesteInSir() const
     {
         return name + "," + (fidel ? "1" : "0") + "," + to_string(procentReducere);
     }
 
+    // Metoda statica pentru a crea un obiect Client dintr-un sir de caractere
     static Client creeazaDinSir(const string &line)
     {
         stringstream ss(line);
