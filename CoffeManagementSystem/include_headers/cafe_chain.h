@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// aici s a folosit polimorfism, functii virtuale, mostenirea, incapsulare
+
+// am utilizat desing patternul OBSERVER
 class Sediu
 {
 protected:
