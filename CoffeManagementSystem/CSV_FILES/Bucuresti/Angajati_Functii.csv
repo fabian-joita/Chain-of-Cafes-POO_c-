@@ -1,6 +1,7 @@
-Nume Angajat,Varsta,Salariu,Funcție,Locatie,Ora Început,Ora Sfârșit
+Nume Angajat,Varsta,Salariu,Functie,Locatie,Ora Inceput,Ora Sfarsit
 Andra Mormolea,23,3000.00,Barista,Bucuresti,10:00,22:00
-Ion Popescu,45,5000.00,Manager,Bucuresti,9:00,18:00
-Maria Ionescu,28,3500.00,Ospatar,Bucuresti,7:00,16:00
-George Joita,27,4000,Ospatar,Bucuresti,9:00,19:00
-Fabian Joita,22,4500.000000,Ospatar,Bucuresti,9:00,20:00
+Ion Popescu,45,5000.00,Manager,Bucuresti,09:00,18:00
+Maria Ionescu,28,3500.00,Ospatar,Bucuresti,07:00,16:00
+George Joita,27,4000,Ospatar,Bucuresti,09:00,19:00
+Fabian Joita,22,4500.000000,Ospatar,Bucuresti,09:00,20:00
+Ana Istrate,35,3700.000000,Ospatar,Bucuresti,09:00,21:00
