@@ -26,9 +26,13 @@ int main()
 
         float venituri = 0, cheltuieli = 0;
 
+        // se creeaza lantul de cafenele prin obiectul CAFE
+        // CAFE este un container pentru unitati individuale de cafenele
         CAFE cafeChain;
 
+        //
         Display *cafe1 = new Display();
+        // metoda setLocation atribuie locatia specifica unui obiect de tip Display
         cafe1->setLocation("Bucuresti");
         cafeChain.addCafeUnit(cafe1);
 
@@ -174,7 +178,11 @@ int main()
                                         getline(cin, descriere);
                                         cout << "-----------------------------------------------------------------------------------" << endl;
 
+                                        // Constructori: Atribuirea valorilor atributelor în momentul initialiarii unui obiect
                                         Eveniment eveniment(nume, data, interval, costOrganizare, costParticipare, locuriDisponibile, locuriOcupate, descriere);
+
+                                        // utilizarea Singleton Design Pattern pentru a creea o intanta unica a clasei Eveniment
+                                        // accesarea obiectului de gestionare a evenimentelor
                                         ManagerEvenimente::getInstance()->getGestionare().salveazaEvenimenteInFisier(FullPathEvenim, eveniment);
                                         ManagerEvenimente::getInstance()->getGestionare().citesteEvenimenteDinFisier(FullPathEvenim);
 

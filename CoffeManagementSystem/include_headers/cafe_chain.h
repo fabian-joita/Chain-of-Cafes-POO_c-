@@ -9,7 +9,6 @@
 using namespace std;
 
 // aici s a folosit polimorfism, functii virtuale, mostenirea, incapsulare
-
 // am utilizat desing patternul OBSERVER
 class Sediu
 {
@@ -34,14 +33,18 @@ public:
     string getLocatie() const;
     void loadEmployeesFromFile(const string &fileName, const string &locatie);
 
+    // abstractizare
     virtual void update() = 0;
     virtual void display() const = 0;
 };
 
+// aceasta clasa derivata, care mosteneste clasa Sediu este necesara deoarece:
+// ofera posibilitatea de a crea un tip specific de sediu care sa afiseze informatiile
+// intr-un mod personalizat
 class Display : public Sediu
 {
 public:
-    void update() override;
+    void update() override; // se face override deci clasa copil nu ramane abstracta
     void display() const override;
 };
 

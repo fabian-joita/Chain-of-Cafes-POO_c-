@@ -76,7 +76,8 @@ void schimbare_detalii(const string &schimbare, const string &locatie)
         string finalpath = (languageOption == "EN") ? path + "Products_Prices.csv" : path + "Produse_Preturi.csv";
         string targetProduct;
         cout << ((languageOption == "EN") ? "Enter the name of the product to modify: " : "Introduceti numele produsului de modificat: ");
-        cin >> targetProduct;
+        cin.ignore();
+        getline(cin, targetProduct);
 
         double newPrice;
         cout << ((languageOption == "EN") ? "Enter the new price: " : "Introduceti noul pret: ");
@@ -86,18 +87,18 @@ void schimbare_detalii(const string &schimbare, const string &locatie)
 
         for (auto &row : produse)
         {
+            cout << "Checking product: " << row[0] << endl; // Debug
             if (row[0] == targetProduct)
             {
-                // Modificam datele produsului
+                cout << "Product found! Modifying..." << endl; // Debug
                 row[1] = to_string(newPrice);
-
                 vector<string> headers = {"ProductName", "Price"};
                 CSV::rewriteCSV(finalpath, produse, headers);
-
                 cout << ((languageOption == "EN") ? "Product data for " : "Datele produsului ") << targetProduct << ((languageOption == "EN") ? " has been updated!" : " au fost actualizate!") << endl;
                 return;
             }
         }
+
         cout << ((languageOption == "EN") ? "Product not found!" : "Produsul nu a fost gasit!") << endl;
     }
     else if (schimbare == "stocuri" || schimbare == "stock")

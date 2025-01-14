@@ -1,16 +1,16 @@
 Ingredient,Unitati
-Apa PLata,58
+Apa PLata,56
 Apa Carbogazoasa,58
 Cafea,42
-Lapte,89
+Lapte,88
 Spuma de lapte,97
-Ciocolata,35
+Ciocolata,34
 Frunze de ceai negru,200
-Frunze de ceai verde,200
+Frunze de ceai verde,199
 Suc de portocale,34
 Suc de mere,43
-Frisca,146
-Paine,62
+Frisca,145
+Paine,90
 Piept de pui,54
 Salata,27
 Sos,14
@@ -26,8 +26,8 @@ Mere,44
 Aluat fraged,90
 Fructe,60
 Crema,14
-Baza biscuiti,35
-Crema de branza,50
+Baza biscuiti,28
+Crema de branza,43
 Faina,80
 Ulei de masline,50
 Sare,100
@@ -40,3 +40,4 @@ Zahar,200
 Iaurt,40
 Inghetata de vanilie,0
 Inghetata de ciocolata,0
+Ulei,30

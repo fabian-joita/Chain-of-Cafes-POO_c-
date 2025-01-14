@@ -102,13 +102,11 @@ void Display::display() const
     {
         cout << "Displaying information for the cafe: " << locatie << endl;
         cout << "Number of employees: " << getNmbEmployees() << endl;
-        cout << "Number of clients: " << getNmbClients() << endl;
     }
     else
     {
         cout << "Afisarea informatiilor pentru cafenea: " << locatie << endl;
         cout << "Numar de angajati: " << getNmbEmployees() << endl;
-        cout << "Numar de clienti: " << getNmbClients() << endl;
     }
 }
 
